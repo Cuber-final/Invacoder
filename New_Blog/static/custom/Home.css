@@ -1,0 +1,26 @@
+.new-container {
+    height: 720px;
+    width: 100%;
+    position: absolute;
+}
+
+.new-row {
+    height: 500px;
+}
+
+
+.lead {
+    width: 600px;
+    margin: 120px auto 50px;
+    font-size: 30px;
+}
+
+.tagline {
+    width: 650px;
+    margin: 30px auto;
+    font-size: 25px
+}
+
+#ps_m{
+    color: #fae97a;
+}

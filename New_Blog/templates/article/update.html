@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Update{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <form method="post" action=".">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="column">栏目</label>
+                        <select class="form-control"
+                                id="column"
+                                name="column"
+                                style="width: 150px"
+                        >
+                            <option value="none">请选择栏目..</option>
+                            {% for column in columns %}
+                                <option value="{{ column.id }}"
+                                        {% if column.id == article.column.id %}
+                                        selected
+                                         {# 预先选定文章已有的栏目#}
+                                        {% endif %}>
+                                    {{ column }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    {{ article_post_form.media }}
+                    {{ article_post_form.as_p }}
+                    <!-- 提交按钮 -->
+                    <button type="submit" class="btn btn-primary">完成</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
