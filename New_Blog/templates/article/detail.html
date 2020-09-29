@@ -9,8 +9,25 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
-
-    <!-- 文章详情 -->
+    <!--一个在屏幕缩小到一定尺寸时显示的可折叠目录的按钮-->
+    <div class="navbar nav-item bg-light d-md-none">
+        <button class="navbar-toggler d-md-none bg-light" type="button" data-toggle="collapse" data-target="#hidden-toc"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+        </button>
+        <!-- 隐藏目录 -->
+        <div class="collapse navbar-collapse d-md-none bg-light" id="hidden-toc">
+            <div class="navbar-nav ml-auto">
+                <div class="card-body" style="padding: 20px 0 0 0; overflow: auto;">
+                    <!-- 目录 -->
+                    <div class="card-text" style="overflow: hidden;">
+                        {{ toc|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--正文及全屏浏览下的目录布局-->
     <div class="container">
         <div class="row">
             <!-- 标题及作者 -->
@@ -56,12 +73,6 @@
                                 <label for="comment_body">
                                     <strong>此处可发表自己的看法：</strong>
                                 </label>
-                                <!-- <textarea type="text"
-                                                 class="form-control"
-                                                 id="body"
-                                                 name="body"
-                                                 rows="2"></textarea>
-                                                -->
                                 <div>
                                     {{ comment_form.media }}
                                     {{ comment_form.comment_body }}
@@ -93,11 +104,23 @@
 
             <!-- 文章目录-->
             {% if toc %}
-                <div class="col-3 mt-4">
-                    <h4><strong>Catalog[目录]</strong></h4>
-                    <hr>
-                    <div>
-                        {{ toc | safe }}
+                <div class="col-3 col-lg-2 card d-none d-md-block" style="border-top-color: white">
+                    <div class="sidebar" id="sidebar">
+                        <div class="inner-wrapper-sticky"
+                             style="position: relative;">
+                            <div class="sidebar__inner">
+                                <div class="card-body" style="padding: 20px 0 0 0; overflow: auto;">
+                                    <!-- 目录 -->
+                                    <div class="card-text" style="overflow: hidden">
+                                        <h4><strong>Catalog[目录]</strong></h4>
+                                        <hr>
+                                        <div>
+                                            {{ toc | safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endif %}
@@ -121,7 +144,12 @@
 {% endblock content %}
 
 {% block script %}
-    <script>
+    <script src="{% static 'jquery/jquery.sticky-sidebar.min.js' %}"></script>
+    <script type="text/javascript">
         $(".django-ckeditor-widget").removeAttr('style');
+        $('#sidebar').stickySidebar({
+            topSpacing: 15,
+            bottomSpacing: 20,
+        });
     </script>
 {% endblock script %}

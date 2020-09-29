@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,15 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'article',
+    'apps',
+    'apps.article',
     'ckeditor',  # 注册富文本编辑器
     'mdeditor',  # 注册支持markdown的富文本编辑器
     'ckeditor_uploader',  # 注册编辑器的文件上传功能
-    'userprofile',
+    'apps.userprofile',
     'password_reset',  # 注册密码重置的第三方应用
-    'comment',  # 注册评论应用
+    'apps.comment',  # 注册评论应用
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,6 +122,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

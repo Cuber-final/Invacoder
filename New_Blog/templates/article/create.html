@@ -16,15 +16,15 @@
 
                     <!-- 文章栏目 -->
                     <div class="form-group">
-                        <label for="column">栏目</label>
+                        栏目：
                         <select class="form-control"
                                 id="column"
                                 name="column"
-                                style="width: 150px"
+                                style="width: 150px;height: 30px;font-size: 12px;display: inline-block"
                         >
-                            <option value="none">请选择栏目..</option>
+                            <option value="none" style="font-size: 12px">请选择栏目..</option>
                             {% for column in columns %}
-                                <option value="{{ column.id }}">
+                                <option value="{{ column.id }}" style="font-size: 12px">
                                     {{ column }}
                                 </option>
                             {% endfor %}
@@ -35,7 +35,7 @@
                     {{ article_post_form.media }}
                     {{ article_post_form.as_p }}
                     <!-- 提交按钮 -->
-                    <button type="submit" class="btn btn-primary">完成</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: 15px;margin-bottom: 5px">完成</button>
                 </form>
             </div>
         </div>

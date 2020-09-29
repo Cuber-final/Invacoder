@@ -1,51 +1,62 @@
 <!-- 定义导航栏 -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
+<nav class="navbar  navbar-expand-lg navbar-light bg-light">
+    <!-- 导航栏商标 -->
+    <a class="navbar-brand ml-2" id="Site_Logo" href="{% url 'homepage' %}"
+       style="font-family: CFRn,Minecrafter,Azonix,sans-serif">Cuber</a>
+    <!--按钮组用来适应不同屏幕大小的情况下，将下面的按钮链接折叠在按钮组中显示-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- 导航入口 -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
 
-        <!-- 导航栏商标 -->
-        <a class="navbar-brand" href="{% url 'homepage' %}">Cuber's Blog</a>
+            <li class="nav-item mr-4">
+                <a class="nav-link py-md-3" id="hp_link" href="{% url 'article:article_list' %}"><i class="mr-1"></i>Articles
+                    <span
+                            class="sr-only">(current)</span></a>
+            </li>
 
-        <!-- 导航入口 -->
-        <div>
-            <ul class="navbar-nav">
-                <!-- 条目 -->
-                <li class="nav-item">
-                    <!-- 改写了这里的 href -->
-                    <a class="nav-link" href="{% url 'article:article_list' %}">Articles</a>
+            <li class="nav-item mr-4">
+                <a class="nav-link py-md-3" id="wt_link" href="{% url 'article:article_create' %}">写文章</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item mr-2 dropdown ">
+                    <a class="nav-link dropdown-toggle py-md-3" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right mt-0 rounded-0 border-0"
+                         aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item pl-3 py-md-3"
+                           href='{% url "userprofile:edit" user.id %}'>information</a>
+                        <a class="dropdown-item pl-3 py-md-3" href='{% url "userprofile:logout" %}'>Log out</a>
+                        <a class="dropdown-item pl-3 py-md-3" href="#" onclick="user_delete()">delete</a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item py-md-3" href="#">Else</a>
+                    </div>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'article:article_create' %}">Creat Your novels</a>
+                <!-- 如果用户未登录，则显示 “登录” -->
+            {% else %}
+                <li class="nav-item mr-2">
+                    <a class="nav-link py-md-3" href="{% url 'userprofile:login' %}">Login</a>
                 </li>
-
-
-                <!-- Django的 if 模板语句 -->
-                {% if user.is_authenticated %}
-                    <!-- 如果用户已经登录，则显示用户名下拉框 -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ user.username }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href='{% url "userprofile:logout" %}'>Log out</a>
-                            <a class="dropdown-item" href="#" onclick="user_delete()">delete</a>
-                            <a class="dropdown-item" href='{% url "userprofile:edit" user.id %}'>information</a>
-                        </div>
-                    </li>
-                    <!-- 如果用户未登录，则显示 “登录” -->
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'userprofile:login' %}">Login</a>
-                    </li>
-                    <!-- if 语句在这里结束 -->
-                {% endif %}
-            </ul>
-        </div>
-
+                <!-- if 语句在这里结束 -->
+            {% endif %}
+        </ul>
+        {% comment %}
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        {% endcomment %}
     </div>
 </nav>
 
+<div id="dividing_line"></div>
 {% comment %}进行用户删除操作的js函数{% endcomment %}
 {% if user.is_authenticated %}
     {% comment %} 隐藏表单，与删除文章相似{% endcomment %}

@@ -4,19 +4,18 @@
 
 <!-- 写入 base.html 中定义的 title -->
 {% block title %} Welcome {% endblock title %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'custom/Home.css' %}">
+{% endblock %}
 <!-- 写入 base.html 中定义的 content -->
 
-{% comment %}搭建首页样式{% endcomment %}
+<!--搭建首页样式-->
 {% block content %}
-
-
-    <div class="new-container" style="background-image: url('{% static "image/Home.jpg" %}')">
+    <div class="new-container">
         <div class="new-row">
-            <p class="lead">Welcome to My Blog </p>
-            <p class="tagline">学习源自生活?  看你要自行车还是要整跑车</p>
-            <p class="tagline" id="ps_m">ps：这是一个基于Django框架开发的个人博客</p>
+            <p class="lead text-center" id="lead_text">Welcome to My Blog </p>
+            <p class="tagline text-center">学习源自生活? 看你要自行车还是要整跑车</p>
         </div>
     </div>
-
 
 {% endblock content %}

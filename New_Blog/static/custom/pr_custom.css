@@ -1,0 +1,63 @@
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    background-image: url('/static/image/Blog/Home.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    top: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+
+}
+
+
+#wrapper {
+
+    min-height: 100%;
+    margin-bottom: -68px;
+}
+
+#nav-footer, #push {
+    height: 68px;
+}
+
+#nav-footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+#Site_Logo {
+    font-size: 30px;
+    margin-right: 40px;
+}
+
+.row {
+    background-color: whitesmoke;
+    opacity: 0.8;
+}
+
+.sidebar {
+    will-change: min-height;
+}
+
+.sidebar__inner {
+    transform: translate(0, 0);
+    will-change: position, transform;
+}
+
+#dividing_line {
+    width: 100%;
+    height: 5px;
+    background: -webkit-linear-gradient(to right, rgb(189, 195, 199), rgb(44, 62, 80));
+    background: linear-gradient(to right, rgb(189, 195, 199), rgb(44, 62, 80));
+    /* background:linear-gradient(to left,#FFCF71 10%, #2376DD 100%);*/
+    /*颜色渐变组合可以到自己收藏的网址找，直接复制CSS代码使用*/
+}
