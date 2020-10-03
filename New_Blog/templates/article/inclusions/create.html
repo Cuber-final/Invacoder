@@ -17,13 +17,13 @@
             <div class="col-12">
                 <br>
                 <!-- 提交文章的表单 -->
-                <form method="post" action=".">
+                <form method="post" action="..">
                     <!-- Django中需要POST数据的地方都必须有csrf_token -->
                     {% csrf_token %}
 
                     <!-- 文章栏目 -->
                     <div class="form-group">
-                        <label for="column">栏目：</label>
+                        <label for="column" style="font-weight: bold">栏目：</label>
                         <select class="form-control"
                                 id="column"
                                 name="column"

@@ -3,7 +3,7 @@
 <nav class="navbar  navbar-expand-lg navbar-light bg-light">
     <!-- 导航栏商标 -->
     <a class="navbar-brand ml-2" id="Site_Logo" href="{% url 'homepage' %}"
-       style="font-family: CFRn,Minecrafter,Azonix,sans-serif">Cuber</a>
+       style="font-family: CFRn,Minecrafter,Azonix,sans-serif;font-weight: normal">Cuber</a>
     <!--按钮组用来适应不同屏幕大小的情况下，将下面的按钮链接折叠在按钮组中显示-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,8 +14,8 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item mr-4">
-                <a class="nav-link py-md-3" id="articles-link" href="{% url 'article:article_list' %}"><i
-                        class="mr-1"></i>Articles
+                <a class="nav-link py-md-3" id="articles-link" href="{% url 'article:article_list' %}">
+                    <i class="fa fa-superpowers mr-1"></i>Articles
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
@@ -29,28 +29,37 @@
 
             {% if user.is_authenticated %}
                 <li class="nav-item mr-4">
-                    <a class="nav-link py-md-3" id="post-link" href="{% url 'article:article_create' %}">写文章</a>
+                    <a class="nav-link py-md-3" id="post-link" href="http://127.0.0.1:8000/admin/">
+                        <i class="fa fa-edit mr-1"></i>后台管理
+                    </a>
                 </li>
                 <li class="nav-item mr-2 dropdown bg-light">
-                    <a class="nav-link dropdown-toggle py-md-3" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle py-md-3 " href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user mr-1"></i>
                         {{ user.username }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mt-2 rounded-0 border-0 bg-light"
                          aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item pl-3 py-md-2"
-                           href='{% url "userprofile:edit" user.id %}'>information</a>
-                        <a class="dropdown-item pl-3 py-md-2" href='{% url "userprofile:logout" %}'>Log out</a>
-                        <a class="dropdown-item pl-3 py-md-2" href="#" onclick="user_delete()">delete</a>
+                        <a class="dropdown-item pl-3 py-md-2 "
+                           href='{% url "userprofile:edit" user.id %}'>
+                            <i class="fa fa-cog mr-1"></i>information
+                        </a>
+                        <a class="dropdown-item pl-3 py-md-2 " href='{% url "userprofile:logout" %}'>
+                            <i class="fa fa-sign-out mr-1"></i>Log out</a>
+                        <!--此删除选项是作为用户使用的而非超级管理员-->
+                        <a class="dropdown-item pl-3 py-md-2 " href="#" onclick="user_delete()">
+                            <i class="fa fa-trash mr-1"></i>delete</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item py-md-1" href="#">Else</a>
+                        <!--<a class="dropdown-item py-md-1 " href="#">Else</a>-->
                     </div>
                 </li>
                 <!-- 如果用户未登录，则显示 “登录” -->
             {% else %}
                 <li class="nav-item mr-2">
-                    <a class="nav-link py-md-3" href="{% url 'userprofile:login' %}">Login</a>
+                    <a class="nav-link py-md-3 " href="{% url 'userprofile:login' %}">
+                        <i class="fa fa-sign-in mr-1"></i>Login</a>
                 </li>
                 <!-- if 语句在这里结束 -->
             {% endif %}

@@ -14,12 +14,32 @@ body {
     top: 0;
     bottom: 0;
     background-repeat: no-repeat;
-
 }
 
-a{
+a {
+    font-weight: bold;
     text-decoration: none;
+    color: #17a2b8;
 }
+
+a:hover {
+    text-decoration: none;
+    color: #d27822;
+}
+
+p {
+    font-weight: bold;
+}
+
+.soft_view {
+    background-color: #8CC7B5;
+}
+
+.bg-light {
+    background-color: whitesmoke;
+}
+
+
 #wrapper {
 
     min-height: 100%;
@@ -43,7 +63,7 @@ a{
 
 .row {
     background-color: whitesmoke;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .sidebar {
@@ -125,23 +145,37 @@ a{
 }
 
 /*云标签颜色*/
-.tags:nth-child(4n+1) {
-    background: #78BBE6;
+.tags:nth-child(5n+1) {
+    background: #D1BA74;
 }
 
-.tags:nth-child(4n+2) {
+.tags:nth-child(5n+2) {
+    background: #F4606C;
+}
+
+.tags:nth-child(5n+3) {
     background: #FF895D;
 }
 
-.tags:nth-child(4n+3) {
-    background: #A3DE83;
+.tags:nth-child(5n+4) {
+    background: #78BBE6;
 }
 
-.tags:nth-child(4n+4) {
-    background: #00BBF0;
+.tags:nth-child(5n+5) {
+    background: #19CAAD;
 }
 
 .tags:hover {
     color: #ece3e3;
     background: #333;
 }
+
+.soft_view {
+    background-color: #8CC7B5;
+}
+
+.bg-light {
+    background-color: whitesmoke;
+}
+
+

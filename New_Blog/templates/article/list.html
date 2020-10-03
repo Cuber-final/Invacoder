@@ -18,8 +18,10 @@
                 })
         {% endcomment %}
         $(function () {
-            $("#articles-link").css('color', '#f3995f');
+            $("#articles-link").css('color', 'rgb(235, 117, 97)');
         })
+
+        let ele = document.getElementsByTagName("a")
     </script>
 
 {% endblock %}
@@ -117,20 +119,18 @@
                 <!-- 文章以列表展示-->
                 <div class="row mt-2">
                     {% for article in articles %}
-
                         <div class="col-12">
                             <!--栏目显示-->
                             {% if article.column %}
-                                <button type="button" class="btn mb-2">
+                                <button type="button" class="btn soft_view mb-2 ">
                                     {{ article.column }}
                                 </button>
                             {% endif %}
-
                             <!-- 标题 -->
                             <h4>
                                 <b>
                                     <a href="{% url 'article:article_detail' article.id %}"
-                                       style="color: black;"
+                                       style="color: black;text-decoration: none"
                                     >
                                         {{ article.title }}
                                     </a>
@@ -148,10 +148,10 @@
                                 <i class="fa fa-eye" aria-hidden="true" title="文章浏览数"></i>
                                     {{ article.total_views }}&nbsp;
                                  </span>
-                                <span style="color: blue;">
+                                <span style="color: #43a9ea;font-weight: bold">
                                 {{ article.created|date:'Y-m-d' }}发布&nbsp
                                 </span>
-                                <span style="color: darkred;">
+                                <span style="color: #D1BA74;font-weight: bold">
                                 {{ article.updated|date:'Y-m-d' }} 更新</span>
                             </div>
                             <hr>
