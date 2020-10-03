@@ -1,5 +1,12 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %} {% load static %}
+{% block script %}
+    <script>
+        $(function () {
+            $("#post-link").css('color', 'red');
+        })
+    </script>
+{% endblock %}
 <!-- 写入 base.html 中定义的 title -->
 {% block title %} Write Your novels {% endblock title %}
 <!-- 写入 base.html 中定义的 content -->
@@ -16,7 +23,7 @@
 
                     <!-- 文章栏目 -->
                     <div class="form-group">
-                        栏目：
+                        <label for="column">栏目：</label>
                         <select class="form-control"
                                 id="column"
                                 name="column"
@@ -30,8 +37,6 @@
                             {% endfor %}
                         </select>
                     </div>
-
-
                     {{ article_post_form.media }}
                     {{ article_post_form.as_p }}
                     <!-- 提交按钮 -->

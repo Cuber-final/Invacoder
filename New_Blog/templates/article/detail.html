@@ -19,8 +19,7 @@
         <div class="collapse navbar-collapse d-md-none bg-light" id="hidden-toc">
             <div class="navbar-nav ml-auto">
                 <div class="card-body" style="padding: 20px 0 0 0; overflow: auto;">
-                    <!-- 目录 -->
-                    <div class="card-text" style="overflow: hidden;">
+                    <div class="card-text toc-list" style="overflow: hidden;">
                         {{ toc|safe }}
                     </div>
                 </div>
@@ -88,7 +87,7 @@
                 {% endif %}
 
                 <!--显示所有关于该文章的评论-->
-                <h4>共有{{ comments.count }}</h4>
+                <h4>共有{{ comments.count }}条评论</h4>
                 <div>
                     {% for comment in comments %}
                         <hr>
@@ -104,14 +103,14 @@
 
             <!-- 文章目录-->
             {% if toc %}
-                <div class="col-3 col-lg-2 card d-none d-md-block" style="border-top-color: white">
+                <div class="col-3  card d-none d-md-block" style="border-top-color: white">
                     <div class="sidebar" id="sidebar">
                         <div class="inner-wrapper-sticky"
                              style="position: relative;">
                             <div class="sidebar__inner">
                                 <div class="card-body" style="padding: 20px 0 0 0; overflow: auto;">
                                     <!-- 目录 -->
-                                    <div class="card-text" style="overflow: hidden">
+                                    <div class="card-text toc-list" style="overflow: hidden">
                                         <h4><strong>Catalog[目录]</strong></h4>
                                         <hr>
                                         <div>
@@ -144,12 +143,26 @@
 {% endblock content %}
 
 {% block script %}
-    <script src="{% static 'jquery/jquery.sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
     <script type="text/javascript">
         $(".django-ckeditor-widget").removeAttr('style');
         $('#sidebar').stickySidebar({
             topSpacing: 15,
             bottomSpacing: 20,
         });
+        {% comment %}
+                采用以下方式修改目录中列表图标样式
+        {% endcomment %}
+        let text = '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+        let $container = $('.toc-list');
+        let $li_group = $container.find('li');
+        $li_group.css('list-style', 'none')
+        /*子元素的属性修改*/
+        /*
+        $li_group.prepend("<i>这是一个测试</i>");
+        console.log($container.find('i'));
+        $li_group = $container.find('i');
+        $li_group.addClass("fa fa-wechat"); */
+        $li_group.prepend(text);
     </script>
 {% endblock script %}

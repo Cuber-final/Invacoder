@@ -1,3 +1,4 @@
+{% load static %}
 <!-- 定义导航栏 -->
 <nav class="navbar  navbar-expand-lg navbar-light bg-light">
     <!-- 导航栏商标 -->
@@ -13,30 +14,37 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item mr-4">
-                <a class="nav-link py-md-3" id="hp_link" href="{% url 'article:article_list' %}"><i class="mr-1"></i>Articles
-                    <span
-                            class="sr-only">(current)</span></a>
+                <a class="nav-link py-md-3" id="articles-link" href="{% url 'article:article_list' %}"><i
+                        class="mr-1"></i>Articles
+                    <span class="sr-only">(current)</span>
+                </a>
             </li>
 
+            <!--github链接图标-->
             <li class="nav-item mr-4">
-                <a class="nav-link py-md-3" id="wt_link" href="{% url 'article:article_create' %}">写文章</a>
+                <a class="nav-link py-md-3" id="github-link" href="https://github.com/Cuber-final">
+                    <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+                </a>
             </li>
+
             {% if user.is_authenticated %}
-                <li class="nav-item mr-2 dropdown ">
+                <li class="nav-item mr-4">
+                    <a class="nav-link py-md-3" id="post-link" href="{% url 'article:article_create' %}">写文章</a>
+                </li>
+                <li class="nav-item mr-2 dropdown bg-light">
                     <a class="nav-link dropdown-toggle py-md-3" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         {{ user.username }}
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right mt-0 rounded-0 border-0"
+                    <div class="dropdown-menu dropdown-menu-right mt-2 rounded-0 border-0 bg-light"
                          aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item pl-3 py-md-3"
+                        <a class="dropdown-item pl-3 py-md-2"
                            href='{% url "userprofile:edit" user.id %}'>information</a>
-                        <a class="dropdown-item pl-3 py-md-3" href='{% url "userprofile:logout" %}'>Log out</a>
-                        <a class="dropdown-item pl-3 py-md-3" href="#" onclick="user_delete()">delete</a>
-
+                        <a class="dropdown-item pl-3 py-md-2" href='{% url "userprofile:logout" %}'>Log out</a>
+                        <a class="dropdown-item pl-3 py-md-2" href="#" onclick="user_delete()">delete</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item py-md-3" href="#">Else</a>
+                        <a class="dropdown-item py-md-1" href="#">Else</a>
                     </div>
                 </li>
                 <!-- 如果用户未登录，则显示 “登录” -->
@@ -47,17 +55,11 @@
                 <!-- if 语句在这里结束 -->
             {% endif %}
         </ul>
-        {% comment %}
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        {% endcomment %}
     </div>
 </nav>
 
 <div id="dividing_line"></div>
-{% comment %}进行用户删除操作的js函数{% endcomment %}
+<!--进行用户删除操作的js函数-->
 {% if user.is_authenticated %}
     {% comment %} 隐藏表单，与删除文章相似{% endcomment %}
     <form

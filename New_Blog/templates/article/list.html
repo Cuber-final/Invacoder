@@ -1,6 +1,7 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load static %}
+{% load article_extras %}
 {% block script %}
     <script>
         //对于JQuery默认参数是document，括号里的document 可以省略，也可以写成 $（function(){}） or $().ready(function(){})
@@ -17,7 +18,7 @@
                 })
         {% endcomment %}
         $(function () {
-            $("#hp_link").css('color','#f3995f');
+            $("#articles-link").css('color', '#f3995f');
         })
     </script>
 
@@ -36,80 +37,83 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <!-- 定义一个面包屑导航样式-->
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
+                <div class="row">
+                    <!-- 定义一个面包屑导航样式-->
+                    <nav aria-label="breadcrumb" class="pl-lg-3  mr-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item pl-md">
+                                {% if order == 'views_rank' %}
+                                    <a href="{% url 'article:article_list' %}?search={{ search }}"
+                                       style="text-decoration: none">
+                                        <i class="fa fa-flash mr-1" title="latest"></i>
+                                        &nbsp;最新
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'article:article_list' %}?search={{ search }}"
+                                       style="text-decoration: none;color: gray">
+                                        <i class="fa fa-flash mr-1" title="latest"></i>
+                                        &nbsp;最新
+                                    </a>
+                                {% endif %}
+                            </li>
 
-                        <li class="breadcrumb-item">
-                            <img src='{% static "image/bootstrap.svg/lightning-fill.svg" %}' alt="" size="16"
-                                 title="new">
-                            {% if order == 'views_rank' %}
-                                <a href="{% url 'article:article_list' %}?search={{ search }}"
-                                   style="text-decoration: none">
-                                    最新
-                                </a>
-                            {% else %}
-                                <a href="{% url 'article:article_list' %}?search={{ search }}"
-                                   style="text-decoration: none;color: gray">
-                                    最新
-                                </a>
-                            {% endif %}
-                        </li>
-                        {#                {%  if order=='views_rank'%}#}
-                        <li class="breadcrumb-item">
-                            <img src='{% static "image/bootstrap.svg/hand-thumbs-up.svg" %}' alt="" width="16"
-                                 height="16"
-                                 title="pop">
-                            {% if order == 'views_rank' %}
-                                <a href="{% url 'article:article_list' %}?order=views_rank&search={{ search }}"
-                                   style="text-decoration: none;color: gray">
-                                    最热
-                                </a>
-                            {% else %}
-                                <a href="{% url 'article:article_list' %}?order=views_rank&search={{ search }}"
-                                   style="text-decoration: none">
-                                    最热
-                                </a>
-                            {% endif %}
+                            <li class="breadcrumb-item">
+                                {% if order == 'views_rank' %}
+                                    <a href="{% url 'article:article_list' %}?order=views_rank&search={{ search }}"
+                                       style="text-decoration: none;color: gray">
+                                        <i class="fa fa-fire mr-1" title="hot"></i>
+                                        &nbsp;最热
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'article:article_list' %}?order=views_rank&search={{ search }}"
+                                       style="text-decoration: none">
+                                        <i class="fa fa-fire mr-1" title="hot"></i>
+                                        &nbsp;最热
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ol>
+                    </nav>
 
-                        </li>
-                    </ol>
-                </nav>
-
-
-                <!--搜索栏-->
-
-                <div class="col-auto">
-
-                    <form class="form-inline" method="get">
+                    <!--搜索栏-->
+                    <form class="nav-item navbar-form mr-2 py-md-2" role="search" method="get">
                         <label class="sr-only">content</label>
-                        <label>
-                            <input type="text"
-                                   class="form-control mb-2 mr-sm-2"
-                                   name="search"
-                                   placeholder="搜索文章.."
-                                   required
-                            >
-                        </label>
-                        <img src='{% static "image/bootstrap.svg/search.svg" %}' alt="" width="16" height="16"
-                             title="search" style="margin-left: 10px">
+                        <div class="input-group">
+                            <label>
+                                <input type="search" name="search" class="form-control rounded-0" placeholder="站内搜索"
+                                       autocomplete="off" required>
+                            </label>
+                            <div class="input-group-btn">
+                                <button class="btn btn-info rounded-0" type="submit"><i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </form>
 
                 </div>
 
-                <!-- 新增，搜索提示语;
-                tips:search参数即搜索表单中的name属性为search对应的内容-->
-
+                {% if cur_tag %}
+                    <h3><span class="gradient-text">{{ cur_tag.name }}</span>&nbsp;有关文章如下</h3>
+                {% endif %}
+                {% if cate %}
+                    <h3><span class="gradient-text">{{ cate.title }}</span>&nbsp;有关文章如下</h3>
+                {% endif %}
+                {% if chose_date %}
+                    <h3><span class="gradient-text">
+                    {{ chose_date.0 }}年{{ chose_date.1 }}月
+                        <!--通过 list.index访问列表中指定索引元素-->
+                    </span>&nbsp;有关文章如下</h3>
+                {% endif %}
+                <!-- 搜索提示语;tips:search参数即搜索表单中的name属性为search对应的内容-->
                 {% if search %}
                     {% if articles %}
-                        <h4><span style="color: #ff0000">"{{ search }}"</span>的搜索结果如下：</h4>
+                        <h5><span class="gradient-text">"{{ search }}"</span>的搜索结果如下：</h5>
                         <hr>
                     {% else %}
-                        <h4>暂无<span style="color: red">"{{ search }}"</span>有关的文章。</h4>
+                        <h5>暂无<span class="gradient-text">"{{ search }}"</span>有关的文章。</h5>
                         <hr>
                     {% endif %}
                 {% endif %}
-
                 <!-- 文章以列表展示-->
                 <div class="row mt-2">
                     {% for article in articles %}
@@ -135,30 +139,27 @@
                             <!-- 摘要 -->
                             <div>
                                 <p style="color: gray;">
-                                    这个后期需要完善信息的展示，由于展示出来的是markdown代码编辑时的文本
+                                    {{ article.excerpt }}...
                                 </p>
                             </div>
                             <!-- 注脚 -->
-                            <p>
-                                <!-- 附加信息 -->
-                                <span style="color: green;">
-                            {{ article.total_views }} 浏览&nbsp;&nbsp;&nbsp;
-                        <img src='{% static "image/bootstrap.svg/eye.svg" %}' alt="" width="15" height="15" title="view"
-                             style="margin-right: 10px">
-                        </span>
+                            <div>
+                                <span>
+                                <i class="fa fa-eye" aria-hidden="true" title="文章浏览数"></i>
+                                    {{ article.total_views }}&nbsp;
+                                 </span>
                                 <span style="color: blue;">
-                            {{ article.created|date:'Y-m-d' }} 发布&nbsp;&nbsp;&nbsp;
-                        </span>
+                                {{ article.created|date:'Y-m-d' }}发布&nbsp
+                                </span>
                                 <span style="color: darkred;">
-                         {{ article.updated|date:'Y-m-d' }} 更新
-                        </span>
-                            </p>
+                                {{ article.updated|date:'Y-m-d' }} 更新</span>
+                            </div>
                             <hr>
                         </div>
                     {% endfor %}
                 </div>
                 <!-- 页码导航-->
-                <div class="paginator row" style="margin-left:0;margin-right: 0;margin-bottom: 40px">
+                <div class="paginator row" style="margin-left:0;margin-right: 0;margin-bottom:5%">
                     <div class="m-auto">
             <span class="step-links">
 
@@ -195,6 +196,11 @@
             </span>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-4">
+                {% show_archives %}
+                {% show_categories %}
+                {% show_tags %}
             </div>
         </div>
     </div>

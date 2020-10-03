@@ -1,0 +1,17 @@
+<div class="card shadow rounded px-3 mb-2 mb-md-3" id="category-card">
+    <div class="card-header bg-white px-0">
+        <strong><i class="fa fa-tags mr-2 f-17"></i>标签云</strong>
+    </div>
+    <div class="card-body px-0 py-3">
+        <div class="tag-cloud">
+            {% for tag in tag_list %}
+                <a class="tags f-16 text-decoration-none" href="{% url 'article:tag-dist' tag.pk %}"
+                   title="可编辑提示语">{{ tag.name }}
+                    <span class="badge badge-light">{{ tag.num_posts }}</span>
+                </a>
+            {% empty %}
+                暂无标签！
+            {% endfor %}
+        </div>
+    </div>
+</div>

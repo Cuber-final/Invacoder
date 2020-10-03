@@ -1,0 +1,21 @@
+<div class="card shadow rounded px-3 mb-2 mb-md-3" id="category-card">
+    <div class="card-header bg-white px-0">
+        <strong><i class="fa fa-bars mr-2 f-17"></i>文章分类</strong>
+    </div>
+
+    <ul class="list-group list-group-flush f-16">
+        {% for category in category_list %}
+            <li class="list-group-item d-flex justify-content-between align-items-center pr-2 py-2">
+                <a class="category-item text-decoration-none" href="{% url 'article:category' category.pk %}">
+                    {{ category.title }}
+                    <span class=" badge text-center post-count">
+                        {{ category.num_posts }}
+                    </span>
+
+                </a>
+            </li>
+        {% empty %}
+            暂无分类！
+        {% endfor %}
+    </ul>
+</div>

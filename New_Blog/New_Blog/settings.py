@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'apps.userprofile',
     'password_reset',  # 注册密码重置的第三方应用
     'apps.comment',  # 注册评论应用
+    'django_tctip',
 ]
 
 MIDDLEWARE = [
@@ -180,7 +181,7 @@ CKEDITOR_CONFIGS = {
 MDEDITOR_CONFIGS = {
     'default': {
         'width': '90% ',  # Custom edit box width
-        'heigth': 500,  # Custom edit box height
+        'height': 500,  # Custom edit box height
         'toolbar': ["undo", "redo", "|",
                     "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
                     "h1", "h2", "h3", "h5", "h6", "|",

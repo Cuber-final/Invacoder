@@ -1,16 +1,17 @@
 import re
 
-# Create your views here.
-
 # 视图函数
 # 引入markdown模块
 import markdown
 # 导入数据模型ArticlePost
+from markdown.extensions.toc import TocExtension
+from django.utils.text import slugify
+
 from apps.comment.forms import CommentPostForm
-from .models import ArticlePost, ArticleColumn
+from .models import ArticlePost, ArticleColumn, Tag
 
 # 引入redirect重定向模块
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # 引入HttpResponse
 from django.http import HttpResponse
 # 引入刚才定义的ArticlePostForm表单类
@@ -47,26 +48,68 @@ def article_list(request):
     if search:
         if order == 'views_rank':
 
-            articles_list = ArticlePost.objects.filter(Q(title__icontains=search) | Q(body__icontains=search)).order_by(
+            post_list = ArticlePost.objects.filter(Q(title__icontains=search) | Q(body__icontains=search)).order_by(
                 '-total_views')
         else:
-            articles_list = ArticlePost.objects.filter(Q(title__icontains=search) | Q(body__icontains=search))
+            post_list = ArticlePost.objects.filter(Q(title__icontains=search) | Q(body__icontains=search))
     else:
         # search不设置为空则会被识别为'None'字符串，这样就依然会触发关键词搜索的效果
         search = ''
         if order == 'views_rank':
             # 根据GET获取的order参数将文章按照浏览数由大到小逆序组织
-            articles_list = ArticlePost.objects.all().order_by('-total_views')
+            post_list = ArticlePost.objects.all().order_by('-total_views')
         else:
-            articles_list = ArticlePost.objects.all()
+            post_list = ArticlePost.objects.all()
     # 每页显示4篇文章
-    paginator = Paginator(articles_list, 4)
+    paginator = Paginator(post_list, 4)
     # 获取 url 中的页码
     page = request.GET.get('page')
     articles = paginator.get_page(page)
     # 将导航对象相应的页码内容返回给 articles
     context = {'articles': articles, 'order': order, 'search': search}
     # render函数：载入模板，并返回context对象
+    return render(request, 'article/list.html', context)
+
+
+def archive(request, year, month):
+    post_list = ArticlePost.objects.filter(created__year=year,
+                                           created__month=month
+                                           ).order_by('-created')
+    date_list = [year, month]
+    # 每页显示4篇文章
+    paginator = Paginator(post_list, 4)
+    # 获取 url 中的页码
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    # 将导航对象相应的页码内容返回给 articles
+    context = {'articles': articles, 'chose_date': date_list}
+    return render(request, 'article/list.html', context)
+
+
+def category(request, pk):
+    cate = get_object_or_404(ArticleColumn, pk=pk)
+    post_list = ArticlePost.objects.filter(column=cate).order_by('-created')
+    # 每页显示4篇文章
+    paginator = Paginator(post_list, 4)
+    # 获取 url 中的页码
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    # 将导航对象相应的页码内容返回给 articles
+    context = {'articles': articles, 'cate': cate}
+    return render(request, 'article/list.html', context)
+
+
+def tag_dist(request, pk):
+    cur_tag = get_object_or_404(Tag, pk=pk)
+    post_list = ArticlePost.objects.filter(tags=cur_tag).order_by('-created')
+    # 每页显示4篇文章
+    paginator = Paginator(post_list, 4)
+    # 获取 url 中的页码
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    # 将导航对象相应的页码内容返回给 articles
+    context = {'articles': articles, 'cur_tag': cur_tag}
+
     return render(request, 'article/list.html', context)
 
 
@@ -92,6 +135,8 @@ def article_detail(request, id):
             'markdown.extensions.codehilite',
 
             'markdown.extensions.toc',
+
+            TocExtension(slugify=slugify),
         ])
 
     # 将正文按照md语法渲染为html页面，同时实现了能够单独提取目录变量
@@ -114,7 +159,7 @@ def article_create(request):
         article_post_form = ArticlePostForm(data=request.POST)
         # 判断提交的数据是否满足模型的要求
         if article_post_form.is_valid():
-            # 保存数据，但暂时不提交到数据库中
+            # 保存数据，但暂时不提交到数据库中-commit=False
             new_article = article_post_form.save(commit=False)
             # 指定数据库中 id=1 的用户为作者
             # 如果你进行过删除数据表的操作，可能会找不到id=1的用户
@@ -126,6 +171,8 @@ def article_create(request):
 
             # 将新文章保存到数据库中
             new_article.save()
+            # 保存tags的多对多关系
+            article_post_form.save_m2m()
             # 完成后返回到文章列表
             return redirect("article:article_list")
         # 如果数据不合法，返回错误信息
@@ -195,7 +242,7 @@ def article_update(request, id):
     # 如果用户 GET 请求获取数据
     else:
         # 创建表单类实例
-        # 将旧原文信息保存在old_context中,添加参数intiall将旧数据传递到表单里
+        # 将旧原文信息保存在old_context中
         old_context = {'title': article.title, 'body': article.body}
 
         columns = ArticleColumn.objects.all()
