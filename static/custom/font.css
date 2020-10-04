@@ -1,0 +1,41 @@
+@font-face {
+    font-family: "bauerboddee";
+    src: url('../fonts/Bauerboddee/bauerboddee_bold_italic.eot')format('embedded-opentype'), url('../fonts/Bauerboddee/bauerboddee_bold_italic.woff')format('woff'), url('../fonts/Bauerboddee/bauerboddee_bold_italic.woff2')format('woff2'), url('../fonts/Bauerboddee/bauerboddee_bold_italic.ttf')format('truetype'), url('../fonts/Bauerboddee/bauerboddee_bold_italic.svg')format('svg');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Minecrafter";
+    src: url('../fonts/MineCrafter/Minecrafter-Alt-1.eot') format('embedded-opentype'), url('../fonts/MineCrafter/Minecrafter-Alt-1.woff') format('woff'), url('../fonts/MineCrafter/Minecrafter-Alt-1.woff2') format('woff2'), url('../fonts/MineCrafter/Minecrafter-Alt-1.ttf') format('truetype'), url('../fonts/MineCrafter/Minecrafter-Alt-1.svg') format('svg');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Templett";
+    src: url('../fonts/Templett/TemplettNormal.eot') format('embedded-opentype'), url('../fonts/Templett/TemplettNormal.woff') format('woff'), url('../fonts/Templett/TemplettNormal.woff2') format('woff2'), url('../fonts/Templett/TemplettNormal.ttf') format('truetype'), url('../fonts/Templett/TemplettNormal.svg') format('svg');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "CFRn";
+    src: url('../fonts/CFRevolution/CFRevolution-1.eot')format('embedded-opentype'), url('../fonts/CFRevolution/CFRevolution-1.woff')format('woff'), url('../fonts/CFRevolution/CFRevolution-1.woff2')format('woff2'), url('../fonts/CFRevolution/CFRevolution-1.ttf')format('truetype'), url('../fonts/CFRevolution/CFRevolution-1.svg')format('svg');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Azonix";
+    src: url('../fonts/Azonix/Azonix.eot')format('embedded-opentype'), url('../fonts/Azonix/Azonix.woff')format('woff'), url('../fonts/Azonix/Azonix.woff2')format('woff2'), url('../fonts/Azonix/Azonix.ttf')format('truetype'), url('../fonts/Azonix/Azonix.svg')format('svg');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "cyber";
+    src: url('../fonts/cyber/cyber.eot')format('embedded-opentype'), url('../fonts/cyber/cyber.woff')format('woff'), url('../fonts/cyber/cyber.woff2')format('woff2'), url('../fonts/cyber/cyber.ttf')format('truetype'), url('../fonts/cyber/cyber.svg')format('svg');
+    font-style: normal;
+    font-weight: normal;
+}

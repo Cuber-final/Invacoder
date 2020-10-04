@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% load static %}
+{% load article_extras %}
+{% load comments_extras %}
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    Details about
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+    <!--一个在屏幕缩小到一定尺寸时显示的可折叠目录的按钮-->
+    <div class="navbar nav-item bg-light d-md-none">
+        <button class="navbar-toggler d-md-none bg-light" type="button" data-toggle="collapse" data-target="#hidden-toc"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+        </button>
+        <!-- 隐藏目录 -->
+        <div class="collapse navbar-collapse d-md-none bg-light" id="hidden-toc">
+            <div class="navbar-nav ml-auto">
+                <div class="card-body" style="padding: 20px 0 0 0; overflow: auto;">
+                    <div class="card-text toc-list" style="overflow: hidden;">
+                        {{ toc|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--正文及全屏浏览下的目录布局-->
+    <div class="container">
+        <div class="row">
+            <!-- 文章详情以及评论的版块-->
+            <div class="col-9" id="article-comment">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-white border-0 rounded-0 mb-2 py-2 f-15">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'article:article_list' %}"><i class="fa fa-home mr-1"></i>Articles</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'article:category' article.column.id %}">
+                                <i class="fa fa-bars mr-1"></i>{{ article.column }}
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active d-none d-md-block" aria-current="page">
+                            {{ article.title }}
+                        </li>
+                        <li class="breadcrumb-item active d-md-none" aria-current="page">当前位置</li>
+                    </ol>
+                </nav>
+
+                <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
+                <hr>
+                <div class="col ml-2">
+                    <i class="fa fa-eye"></i>{{ article.total_views }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="color: #43a9ea;font-weight: bold">
+                        {{ article.created|relate_time }}&nbsp
+                        <i class="fa fa-history"></i>&nbsp;
+                    </span>
+                    &nbsp&nbsp&nbsp
+                    <span style="color: #D1BA74;font-weight: bold">
+                        {{ article.updated|relate_time }}&nbsp;&nbsp
+                        <i class="fa fa-spinner fa-spin"></i>&nbsp;
+                    </span>&nbsp&nbsp&nbsp
+                    <span><a href="#comment_block"><i class="fa fa-comment"></i>如有浏览体验的问题以及Bug，欢迎评论区留言</a></span>
+                </div>
+                <!-- 文章正文 -->
+                <div class="col-12">
+                    <p>{{ article.body|safe }}</p>
+                </div>
+                <!--<h3>点赞版块</h3>-->
+                {% show_likes_num article %}
+                <h3>评论区</h3>
+                <!--评论发表-->
+                {% if user.is_authenticated %}
+                    {% show_comment_post article %}
+                {% else %}
+                    <br>
+                    <h5> 请<a href="{% url 'userprofile:login' %}" class="link_style">登录</a>后，再进行评论及回复</h5>
+                {% endif %}
+                <!--已有评论-->
+                {% show_comment_list article user comments %}
+            </div>
+            <!-- 文章目录版块，与文章版块并列-->
+            {% if toc %}
+                <div class="col-3  card d-none d-md-block" style="border-top-color: white">
+                    <div class="sidebar" id="sidebar">
+                        <div class="inner-wrapper-sticky"
+                             style="position: relative;">
+                            <div class="sidebar__inner">
+                                <div class="card-body" style="padding: 20px 0 0 0; overflow: auto;">
+                                    <!-- 目录 -->
+                                    <div class="card-text toc-list" style="overflow: hidden">
+                                        <h4><strong>Catalog[目录]</strong></h4>
+                                        <hr>
+                                        <div>
+                                            {{ toc | safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+    <script type="text/javascript">
+        $(".django-ckeditor-widget").removeAttr('style');
+        $('#sidebar').stickySidebar({
+            topSpacing: 10,
+            bottomSpacing: 10,
+        });
+
+        //采用以下方式修改目录中列表图标样式
+        let text = '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+        let $container = $('.toc-list');
+        let $li_group = $container.find('li');
+        $li_group.css('list-style', 'none')
+        /*子元素的属性修改*/
+        $li_group.prepend(text);
+    </script>
+{% endblock script %}

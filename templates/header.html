@@ -1,0 +1,100 @@
+{% load static %}
+{% load article_extras %}
+<!-- 定义导航栏 -->
+<nav class="navbar  navbar-expand-lg navbar-light bg-light">
+    <!-- 导航栏商标 -->
+    <a class="navbar-brand ml-2" id="Site_Logo" href="{% url 'homepage' %}"
+       style="font-family: CFRn,Minecrafter,Azonix,sans-serif;font-weight: normal">Cuber</a>
+    <!--按钮组用来适应不同屏幕大小的情况下，将下面的按钮链接折叠在按钮组中显示-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- 导航入口 -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item mr-4">
+                <a class="nav-link py-md-3" id="articles-link" href="{% url 'article:article_list' %}">
+                    <i class="fa fa-superpowers mr-1"></i>Articles
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+            <!--github链接图标-->
+            <li class="nav-item mr-4">
+                <a class="nav-link py-md-3" id="github-link" href="https://github.com/Cuber-final">
+                    <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+                </a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <!--使用模板过滤器将user的用户名变量转换为字符串并且将其与sp的用户名对比，实现了后台按钮的特殊显示-->
+                {% ifequal user.username|string_transfer 'Cuber' %}
+                    <li class="nav-item mr-4">
+                        <a class="nav-link py-md-3" id="admin-link" href="http://127.0.0.1:8000/admin/">
+                            <i class="fa fa-cube mr-1"></i>后台管理
+                        </a>
+                    </li>
+                {% endifequal %}
+                <li class="nav-item mr-2 dropdown bg-light">
+                    <a class="nav-link dropdown-toggle py-md-3 " href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user mr-1"></i>
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right mt-2 rounded-0 border-0 bg-light"
+                         aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item pl-3 py-md-2 "
+                           href='{% url "userprofile:edit" user.id %}'>
+                            <i class="fa fa-cog mr-1"></i>information
+                        </a>
+                        <a class="dropdown-item pl-3 py-md-2 " href='{% url "userprofile:logout" %}'>
+                            <i class="fa fa-sign-out mr-1"></i>Log out</a>
+                        <!--此删除选项是作为用户使用的而非超级管理员-->
+                        <a class="dropdown-item pl-3 py-md-2 " href="#" onclick="user_delete()">
+                            <i class="fa fa-trash mr-1"></i>delete</a>
+                        <div class="dropdown-divider"></div>
+                        <!--<a class="dropdown-item py-md-1 " href="#">Else</a>-->
+                    </div>
+                </li>
+                <!-- 如果用户未登录，则显示 “登录” -->
+            {% else %}
+                <li class="nav-item mr-2">
+                    <a class="nav-link py-md-3 " href="{% url 'userprofile:login' %}">
+                        <i class="fa fa-sign-in mr-1"></i>Login</a>
+                </li>
+                <!-- if 语句在这里结束 -->
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<div id="dividing_line"></div>
+<!--进行用户删除操作的js函数-->
+{% if user.is_authenticated %}
+    {% comment %} 隐藏表单，与删除文章相似{% endcomment %}
+    <form
+            style="display:none;"
+            id="user_delete"
+            action="{% url 'userprofile:delete' user.id %}"
+            method="POST"
+    >
+        {% csrf_token %}
+        <button type="submit">发送</button>
+    </form>
+    <script>
+        function user_delete() {
+            // 调用layer弹窗组件
+            layer.open({
+                title: "确认删除",
+                content: "确认删除用户资料吗？",
+                yes: function (index, layero) {
+                    $('form#user_delete button').click();
+                    layer.close(index);
+                },
+            })
+        }
+    </script>
+{% endif %}

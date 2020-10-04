@@ -1,0 +1,181 @@
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    background-image: url('/static/image/Blog/Home.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    top: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(57, 77, 86);
+}
+
+a:hover {
+    text-decoration: none;
+    color: #d27822;
+}
+
+p {
+    font-weight: bold;
+}
+
+.soft_view {
+    background-color: #8CC7B5;
+}
+
+.bg-light {
+    background-color: whitesmoke;
+}
+
+
+#wrapper {
+
+    min-height: 100%;
+    margin-bottom: -68px;
+}
+
+#nav-footer, #push {
+    height: 68px;
+}
+
+#nav-footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+#Site_Logo {
+    font-size: 30px;
+    margin-right: 40px;
+}
+
+.row {
+    background-color: whitesmoke;
+    opacity: 0.9;
+}
+
+.sidebar {
+    will-change: min-height;
+}
+
+.sidebar__inner {
+    transform: translate(0, 0);
+    will-change: position, transform;
+}
+
+/*以下为添加一个颜色渐变分割线的方式*/
+#dividing_line {
+    width: 100%;
+    height: 5px;
+    background: -webkit-linear-gradient(to right, rgb(48, 232, 191), rgb(255, 130, 53)); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgb(48, 232, 191), rgb(255, 130, 53));
+    /*
+    以上两句话作用一样，是为了兼容多种浏览器
+    */
+    /* background:linear-gradient(to left,#FFCF71 10%, #2376DD 100%);*/
+    /*颜色渐变组合可以到自己收藏的网址找，直接复制CSS代码使用*/
+}
+
+/*
+以下为添加一个颜色渐变文本的方式
+*/
+
+.gradient-text {
+    background: #30e8bf; /* fallback for old browsers */
+    background: linear-gradient(to right, rgb(44, 62, 80), rgb(189, 195, 199));
+    /*background-image: -webkit-linear-gradient(to right, rgb(206, 189, 52), rgb(229, 54, 54));
+    此方法部分浏览器不兼容*/
+    /*为文本元素提供渐变背景*/
+    -webkit-background-clip: text; /*用渐变色背景填充文本*/
+    color: transparent;
+    -webkit-text-fill-color: transparent; /*将文本设置为透明，此行与上一行效果一样*/
+}
+
+
+.toc-list a {
+    font-size: 1rem;
+    font-weight: bolder;
+    background: #30e8bf; /* fallback for old browsers */
+    background: linear-gradient(to right, rgb(44, 62, 80), rgb(189, 195, 199));
+    /*background-image: -webkit-linear-gradient(to right, rgb(206, 189, 52), rgb(229, 54, 54));
+    此方法部分浏览器不兼容*/
+    /*为文本元素提供渐变背景*/
+    -webkit-background-clip: text; /*用渐变色背景填充文本*/
+    color: transparent;
+    -webkit-text-fill-color: transparent; /*将文本设置为透明，此行与上一行效果一样*/
+    text-decoration: none;
+}
+
+#id_title, #id_tags {
+    margin-left: 15px;
+    background-color: #92B8B1;
+}
+
+#id_tags {
+    width: 25%;
+}
+
+/*标签云*/
+.tag-cloud {
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    text-align: left;
+}
+
+.tags {
+    color: #fff;
+    padding: .08rem .4rem;
+    float: left;
+    text-align: center;
+    margin: .3rem;
+    transition: all .5s;
+}
+
+/*云标签颜色,用到nth-child选择器，指的是当前元素的父元素的第n个子元素*/
+.tags:nth-child(5n+1) {
+    background: #D1BA74;
+}
+
+.tags:nth-child(5n+2) {
+    background: #F4606C;
+}
+
+.tags:nth-child(5n+3) {
+    background: #FF895D;
+}
+
+.tags:nth-child(5n+4) {
+    background: #78BBE6;
+}
+
+.tags:nth-child(5n+5) {
+    background: #19CAAD;
+}
+
+.tags:hover {
+    color: #ece3e3;
+    background: lightgray;
+}
+
+.soft_view {
+    background-color: #8CC7B5;
+}
+
+.bg-light {
+    background-color: whitesmoke;
+}
+
+
