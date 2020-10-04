@@ -1,7 +1,9 @@
-<!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
-{% load static %}
 
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% load static %}
+{% load article_extras %}
+{% load comments_extras %}
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
     Details about
@@ -29,8 +31,8 @@
     <!--正文及全屏浏览下的目录布局-->
     <div class="container">
         <div class="row">
-            <!-- 标题及作者 -->
-            <div class="col-9">
+            <!-- 文章详情以及评论的版块-->
+            <div class="col-9" id="article-comment">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-white border-0 rounded-0 mb-2 py-2 f-15">
                         <li class="breadcrumb-item">
@@ -47,60 +49,41 @@
                         <li class="breadcrumb-item active d-md-none" aria-current="page">当前位置</li>
                     </ol>
                 </nav>
+
                 <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-                <div class="col-12 alert alert-success">
-                    <div>
-                        views:{{ article.total_views }}
-                    </div>
+                <hr>
+                <div class="col ml-2">
+                    <i class="fa fa-eye"></i>{{ article.total_views }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="color: #43a9ea;font-weight: bold">
+                        {{ article.created|relate_time }}&nbsp
+                        <i class="fa fa-history"></i>&nbsp;
+                    </span>
+                    &nbsp&nbsp&nbsp
+                    <span style="color: #D1BA74;font-weight: bold">
+                        {{ article.updated|relate_time }}&nbsp;&nbsp
+                        <i class="fa fa-spinner fa-spin"></i>&nbsp;
+                    </span>&nbsp&nbsp&nbsp
+                    <span><a href="#comment_block"><i class="fa fa-comment"></i>如有浏览体验的问题以及Bug，欢迎评论区留言</a></span>
                 </div>
                 <!-- 文章正文 -->
                 <div class="col-12">
                     <p>{{ article.body|safe }}</p>
                 </div>
-
-
-                <!--评论栏-->
-                <hr>
+                <!--<h3>点赞版块</h3>-->
+                {% show_likes_num article %}
+                <h3>评论区</h3>
+                <!--评论发表-->
                 {% if user.is_authenticated %}
-                    <div>
-                        <form
-                                action="{% url 'comment:post_comment' article.id %}"
-                                method="POST">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="comment_body">
-                                    <strong>此处可发表自己的看法：</strong>
-                                </label>
-                                <div>
-                                    {{ comment_form.media }}
-                                    {{ comment_form.comment_body }}
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">发送</button>
-                        </form>
-                    </div>
-                    <br>
+                    {% show_comment_post article %}
                 {% else %}
                     <br>
                     <h5> 请<a href="{% url 'userprofile:login' %}" class="link_style">登录</a>后，再进行评论及回复</h5>
                 {% endif %}
-
-                <!--显示所有关于该文章的评论-->
-                <h4>共有{{ comments.count }}条评论</h4>
-                <div>
-                    {% for comment in comments %}
-                        <hr>
-                        <p>
-                            <strong style="color: cadetblue">{{ comment.user }}</strong>
-                            于
-                            <span style="color: #28a745">{{ comment.created|date:"Y-m-d H:i:s" }}</span>时评论：
-                        </p>
-                        <pre style="font-family: inherit;font-size: 1em;">{{ comment.comment_body| safe }}</pre>
-                    {% endfor %}
-                </div>
+                <!--已有评论-->
+                {% show_comment_list article user comments %}
             </div>
-
-            <!-- 文章目录-->
+            <!-- 文章目录版块，与文章版块并列-->
             {% if toc %}
                 <div class="col-3  card d-none d-md-block" style="border-top-color: white">
                     <div class="sidebar" id="sidebar">
@@ -125,7 +108,6 @@
         </div>
     </div>
 
-
 {% endblock content %}
 
 {% block script %}
@@ -133,22 +115,16 @@
     <script type="text/javascript">
         $(".django-ckeditor-widget").removeAttr('style');
         $('#sidebar').stickySidebar({
-            topSpacing: 15,
-            bottomSpacing: 20,
+            topSpacing: 10,
+            bottomSpacing: 10,
         });
-        {% comment %}
-                采用以下方式修改目录中列表图标样式
-        {% endcomment %}
+
+        //采用以下方式修改目录中列表图标样式
         let text = '<i class="fa fa-angle-right" aria-hidden="true"></i>'
         let $container = $('.toc-list');
         let $li_group = $container.find('li');
         $li_group.css('list-style', 'none')
         /*子元素的属性修改*/
-        /*
-        $li_group.prepend("<i>这是一个测试</i>");
-        console.log($container.find('i'));
-        $li_group = $container.find('i');
-        $li_group.addClass("fa fa-wechat"); */
         $li_group.prepend(text);
     </script>
 {% endblock script %}

@@ -1,0 +1,24 @@
+{% load article_extras %}
+{% load mptt_tags %}
+<!--评论栏-->
+<hr>
+    <div>
+        <form
+                action="{% url 'comment:post_comment' article.id %}"
+                method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="comment_body">
+                    <strong>此处可发表自己的看法：</strong>
+                </label>
+                <div>
+                    {{ comment_form.media }}
+                    {{ comment_form.comment_body }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">发送</button>
+        </form>
+    </div>
+    <br>
+
+<!--显示所有关于该文章的评论的区域在另一个模板-->

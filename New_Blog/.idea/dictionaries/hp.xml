@@ -7,10 +7,13 @@
       <w>ckeditor</w>
       <w>codehilite</w>
       <w>codesnippet</w>
+      <w>csrftoken</w>
+      <w>frameborder</w>
       <w>lineutils</w>
       <w>mdeditor</w>
       <w>minecrafter</w>
       <w>monokai</w>
+      <w>mptt</w>
       <w>navbar</w>
       <w>sameorigin</w>
       <w>simpleui</w>

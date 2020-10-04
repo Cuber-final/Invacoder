@@ -149,10 +149,13 @@
                                     {{ article.total_views }}&nbsp;
                                  </span>
                                 <span style="color: #43a9ea;font-weight: bold">
-                                {{ article.created|date:'Y-m-d' }}发布&nbsp
+                                    {{ article.created|relate_time }}&nbsp
+                                    <i class="fa fa-history"></i>&nbsp;
                                 </span>
                                 <span style="color: #D1BA74;font-weight: bold">
-                                {{ article.updated|date:'Y-m-d' }} 更新</span>
+                                {{ article.updated|relate_time }}&nbsp;
+                                    <i class="fa fa-spinner fa-spin"></i>&nbsp;
+                                </span>
                             </div>
                             <hr>
                         </div>
@@ -201,6 +204,7 @@
                 {% show_archives %}
                 {% show_categories %}
                 {% show_tags %}
+                {% show_share_link %}
             </div>
         </div>
     </div>

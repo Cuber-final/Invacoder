@@ -4,6 +4,8 @@ import re
 # 引入markdown模块
 import markdown
 # 导入数据模型ArticlePost
+from django.http import HttpResponse
+from django.views import View
 from markdown.extensions.toc import TocExtension
 from django.utils.text import slugify
 
@@ -132,6 +134,16 @@ def article_detail(request, id):
     comment_form = CommentPostForm()
     context = {'article': article, 'toc': md.toc, 'comments': comments, 'comment_form': comment_form, }
     return render(request, 'article/detail.html', context)
+
+
+# 点赞增长的类视图
+class LikesRiseView(View):
+    @staticmethod
+    def post(request, *args, **kwargs):
+        article = ArticlePost.objects.get(id=kwargs.get('id'))
+        article.likes_num += 1
+        article.save()
+        return HttpResponse('success')
 
 
 def homepage(request):

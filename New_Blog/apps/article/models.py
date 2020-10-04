@@ -65,13 +65,16 @@ class ArticlePost(models.Model):
     # 文章浏览量
     total_views = models.PositiveIntegerField('浏览数', default=0)
 
+    # 文章被点赞数
+    likes_num = models.PositiveIntegerField('点赞数', default=0)
+
     # 内部类 class Meta 用于给 model 定义元数据
     def save(self, *args, **kwargs):
         self.modified_time = timezone.now()
         md = markdown.Markdown(extensions=['markdown.extensions.extra',
                                            'markdown.extensions.codehilite', ])
         # 将markdown文本渲染成html文本，然后过滤标签选出文字
-        self.excerpt = strip_tags(md.convert(self.body)[:50])
+        self.excerpt = strip_tags(md.convert(self.body)[:30])
         super().save(*args, **kwargs)
 
     class Meta:

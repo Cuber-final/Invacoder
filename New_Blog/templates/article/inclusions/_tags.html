@@ -5,8 +5,9 @@
     <div class="card-body px-0 py-3">
         <div class="tag-cloud">
             {% for tag in tag_list %}
-                <a class="tags f-16 text-decoration-none" style="color: whitesmoke" href="{% url 'article:tag-dist' tag.pk %}"
-                   title="可编辑提示语">{{ tag.name }}
+                <a class="tags f-16 text-decoration-none" style="color: whitesmoke"
+                   href="{% url 'article:tag-dist' tag.pk %}"
+                   title="有{{ tag.num_posts }}篇文章">{{ tag.name }}
                     <span class="badge badge-light">{{ tag.num_posts }}</span>
                 </a>
             {% empty %}

@@ -1,4 +1,5 @@
 {% load static %}
+{% load article_extras %}
 <!-- 定义导航栏 -->
 <nav class="navbar  navbar-expand-lg navbar-light bg-light">
     <!-- 导航栏商标 -->
@@ -28,11 +29,14 @@
             </li>
 
             {% if user.is_authenticated %}
-                <li class="nav-item mr-4">
-                    <a class="nav-link py-md-3" id="post-link" href="http://127.0.0.1:8000/admin/">
-                        <i class="fa fa-edit mr-1"></i>后台管理
-                    </a>
-                </li>
+                <!--使用模板过滤器将user的用户名变量转换为字符串并且将其与sp的用户名对比，实现了后台按钮的特殊显示-->
+                {% ifequal user.username|string_transfer 'Cuber' %}
+                    <li class="nav-item mr-4">
+                        <a class="nav-link py-md-3" id="admin-link" href="http://127.0.0.1:8000/admin/">
+                            <i class="fa fa-cube mr-1"></i>后台管理
+                        </a>
+                    </li>
+                {% endifequal %}
                 <li class="nav-item mr-2 dropdown bg-light">
                     <a class="nav-link dropdown-toggle py-md-3 " href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"

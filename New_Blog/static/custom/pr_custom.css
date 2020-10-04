@@ -19,7 +19,7 @@ body {
 a {
     font-weight: bold;
     text-decoration: none;
-    color: #17a2b8;
+    color: rgb(57, 77, 86);
 }
 
 a:hover {
@@ -144,7 +144,7 @@ p {
     transition: all .5s;
 }
 
-/*云标签颜色*/
+/*云标签颜色,用到nth-child选择器，指的是当前元素的父元素的第n个子元素*/
 .tags:nth-child(5n+1) {
     background: #D1BA74;
 }
@@ -167,7 +167,7 @@ p {
 
 .tags:hover {
     color: #ece3e3;
-    background: #333;
+    background: lightgray;
 }
 
 .soft_view {

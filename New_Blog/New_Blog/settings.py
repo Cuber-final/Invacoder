@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'password_reset',  # 注册密码重置的第三方应用
     'apps.comment',  # 注册评论应用
     'django_tctip',
+    'mptt',  # 注册多级评论应用
 ]
 
 MIDDLEWARE = [
@@ -130,7 +131,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'SAMEORIGIN'  # Django 3 修改了 xframe 的默认设置，即不支持 iframe 自己,因此通过此设定可以实现支持iframe
 # 这句话不能少，否则无法实现将上传的图片显示到前端
 
 # 放在django项目根目录，同时也需要创建media文件夹
@@ -142,15 +143,51 @@ CKEDITOR_UPLOAD_PATH = 'upload/'
 
 CKEDITOR_CONFIGS = {
     # django-ckeditor默认使用default配置
+    # 'default': {
+    #     # 编辑器宽度自适应
+    #     'width': 'auto',
+    #     'height': '200px',
+    #     # tab键转换空格数
+    #     'tabSpaces': 4,
+    #     'toolbar': 'Custom',
+    #     # 工具栏按钮
+    #
+    #     'toolbar_Custom': [
+    #         # 表情 代码块
+    #         ['Smiley', 'CodeSnippet'],
+    #         # 字体风格
+    #         ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
+    #         # 字体颜色
+    #         ['TextColor', 'BGColor'],
+    #
+    #         ['Form', 'Checkbox', 'Radio', 'Select', 'Button', 'ImageButton', ],
+    #         # ['Form', 'Checkbox', 'Radio',  'Select', 'Button', 'ImageButton',]
+    #
+    #         # 图片，动画
+    #         ['Image', 'Table', 'HorizontalRule', 'SpecialChar', ],  # 'PageBreak', 'Iframe'
+    #         ['Styles', 'Format', 'Font', 'FontSize'],
+    #         # 链接
+    #         ['Link', 'Unlink'],
+    #         # 列表
+    #         ['NumberedList', 'BulletedList'],
+    #         # 最大化
+    #         ['Maximize']
+    #
+    #     ],
+    #     # 加入代码块插件
+    #     'extraPlugins': ','.join(['codesnippet', 'uploadimage', 'widget', 'lineutils', 'prism']),
+    # }
+
+    # django-ckeditor默认使用default配置
     'default': {
         # 编辑器宽度自适应
         'width': 'auto',
-        'height': '200px',
+        'height': '250px',
         # tab键转换空格数
         'tabSpaces': 4,
+        # 工具栏风格
         'toolbar': 'Custom',
         # 工具栏按钮
-
         'toolbar_Custom': [
             # 表情 代码块
             ['Smiley', 'CodeSnippet'],
@@ -158,23 +195,15 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
             # 字体颜色
             ['TextColor', 'BGColor'],
-
-            ['Form', 'Checkbox', 'Radio', 'Select', 'Button', 'ImageButton', ],
-            # ['Form', 'Checkbox', 'Radio',  'Select', 'Button', 'ImageButton',]
-
-            # 图片，动画
-            ['Image', 'Table', 'HorizontalRule', 'SpecialChar', ],  # 'PageBreak', 'Iframe'
-            ['Styles', 'Format', 'Font', 'FontSize'],
             # 链接
             ['Link', 'Unlink'],
             # 列表
             ['NumberedList', 'BulletedList'],
             # 最大化
             ['Maximize']
-
         ],
         # 加入代码块插件
-        'extraPlugins': ','.join(['codesnippet', 'uploadimage', 'widget', 'lineutils', 'prism']),
+        'extraPlugins': ','.join(['codesnippet', 'prism', 'widget', 'lineutils']),
     }
 }
 

@@ -25,4 +25,11 @@ urlpatterns = [
     # 文章详情
     path('article-detail/<int:id>/', views.article_detail, name='article_detail'),
 
+    # 点赞 +1
+    path(
+        'increase-likes/<int:id>/',
+        views.LikesRiseView.as_view(),
+        name='likes_Rise'
+    ),
+
 ]
