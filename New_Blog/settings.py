@@ -20,11 +20,8 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
+
 SECRET_KEY = 'Your key'
-=======
-SECRET_KEY = ''
->>>>>>> 34a8cccdb15b29f1f05599b85d89a56f8b4dd7d0
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -245,26 +242,16 @@ MDEDITOR_CONFIGS = {
 }
 
 # ---------------------------
-<<<<<<< HEAD
+
 EMAIL_HOST = 'host email'
 
 EMAIL_HOST_USER = 'your email'
 
 EMAIL_HOST_PASSWORD = 'your host password'
-=======
-EMAIL_HOST = ''
-
-EMAIL_HOST_USER = ''
-
-EMAIL_HOST_PASSWORD = ''
->>>>>>> 34a8cccdb15b29f1f05599b85d89a56f8b4dd7d0
 
 EMAIL_PORT = 0
 
 EMAIL_USE_TLS = True
 
-<<<<<<< HEAD
 DEFAULT_FROM_EMAIL = 'your default email'
-=======
-DEFAULT_FROM_EMAIL = ''
->>>>>>> 34a8cccdb15b29f1f05599b85d89a56f8b4dd7d0
+
