@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%ye31rr_5r#fzhzn!_uph&z7u*jd*!qyamh-3j!4lw@(^&ckhr'
+SECRET_KEY = 'Your key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -241,14 +241,14 @@ MDEDITOR_CONFIGS = {
 }
 
 # ---------------------------
-EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST = 'host email'
 
-EMAIL_HOST_USER = '809164256@qq.com'
+EMAIL_HOST_USER = 'your email'
 
-EMAIL_HOST_PASSWORD = 'sydfuztwstbzbfdb'
+EMAIL_HOST_PASSWORD = 'your host password'
 
-EMAIL_PORT = 25
+EMAIL_PORT = 0
 
 EMAIL_USE_TLS = True
 
-DEFAULT_FROM_EMAIL = '809164256@qq.com'
+DEFAULT_FROM_EMAIL = 'your default email'
