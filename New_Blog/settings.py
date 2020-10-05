@@ -241,14 +241,14 @@ MDEDITOR_CONFIGS = {
 }
 
 # ---------------------------
-EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST = ''
 
-EMAIL_HOST_USER = '809164256@qq.com'
+EMAIL_HOST_USER = ''
 
-EMAIL_HOST_PASSWORD = 'sydfuztwstbzbfdb'
+EMAIL_HOST_PASSWORD = ''
 
 EMAIL_PORT = 25
 
 EMAIL_USE_TLS = True
 
-DEFAULT_FROM_EMAIL = '809164256@qq.com'
+DEFAULT_FROM_EMAIL = ''
