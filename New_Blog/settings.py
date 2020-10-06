@@ -20,19 +20,14 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD
-SECRET_KEY = 'Your key'
-=======
-SECRET_KEY = ''
->>>>>>> 34a8cccdb15b29f1f05599b85d89a56f8b4dd7d0
+SECRET_KEY = os.getenv('SECRET_KEY', 'your_secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['47.96.13.183', 'Cuber_CID.com']
+# 部署到服务器时改为自己公网IP在首位
+ALLOWED_HOSTS = os.getenv('CUBER_HOST', '127.0.0.1')
 
-# 静态文件收集目录
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 # Application definition
 INSTALLED_APPS = [
     'simpleui',
@@ -82,6 +77,9 @@ TEMPLATES = [
     },
 ]
 
+# 添加app 目录
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+# WSGI网关接口，即web应用和服务器的接口
 WSGI_APPLICATION = 'New_Blog.wsgi.application'
 
 # Database
@@ -129,60 +127,25 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+# 静态文件收集目录
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'  # Django 3 修改了 xframe 的默认设置，即不支持 iframe 自己,因此通过此设定可以实现支持iframe
-# 这句话不能少，否则无法实现将上传的图片显示到前端
-
-# 放在django项目根目录，同时也需要创建media文件夹
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-
+# 媒体文件收集
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CKEDITOR_UPLOAD_PATH = 'upload/'
+# Django 3 修改了 XFRAME 的默认设置，即不支持 iframe 自己,因此通过此设定可以实现支持iframe
+# 这句话不能少，否则无法实现将上传的图片显示到前端
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+CKEDITOR_UPLOAD_PATH = 'media/upload/'
+
+# 评论区使用的ckeditor编辑器
 CKEDITOR_CONFIGS = {
-    # django-ckeditor默认使用default配置
-    # 'default': {
-    #     # 编辑器宽度自适应
-    #     'width': 'auto',
-    #     'height': '200px',
-    #     # tab键转换空格数
-    #     'tabSpaces': 4,
-    #     'toolbar': 'Custom',
-    #     # 工具栏按钮
-    #
-    #     'toolbar_Custom': [
-    #         # 表情 代码块
-    #         ['Smiley', 'CodeSnippet'],
-    #         # 字体风格
-    #         ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
-    #         # 字体颜色
-    #         ['TextColor', 'BGColor'],
-    #
-    #         ['Form', 'Checkbox', 'Radio', 'Select', 'Button', 'ImageButton', ],
-    #         # ['Form', 'Checkbox', 'Radio',  'Select', 'Button', 'ImageButton',]
-    #
-    #         # 图片，动画
-    #         ['Image', 'Table', 'HorizontalRule', 'SpecialChar', ],  # 'PageBreak', 'Iframe'
-    #         ['Styles', 'Format', 'Font', 'FontSize'],
-    #         # 链接
-    #         ['Link', 'Unlink'],
-    #         # 列表
-    #         ['NumberedList', 'BulletedList'],
-    #         # 最大化
-    #         ['Maximize']
-    #
-    #     ],
-    #     # 加入代码块插件
-    #     'extraPlugins': ','.join(['codesnippet', 'uploadimage', 'widget', 'lineutils', 'prism']),
-    # }
-
     # django-ckeditor默认使用default配置
     'default': {
         # 编辑器宽度自适应
@@ -212,6 +175,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# 后台使用的富文本编辑器
 MDEDITOR_CONFIGS = {
     'default': {
         'width': '90% ',  # Custom edit box width
@@ -245,26 +209,19 @@ MDEDITOR_CONFIGS = {
 }
 
 # ---------------------------
-<<<<<<< HEAD
-EMAIL_HOST = 'host email'
+EMAIL_HOST = os.getenv('CUBER_EMAIL_HOST', 'smtp.qq.com')
 
-EMAIL_HOST_USER = 'your email'
+EMAIL_HOST_USER = os.getenv('CUBER_EMAIL_HOST_USER', 'your-email-address')
 
-EMAIL_HOST_PASSWORD = 'your host password'
-=======
-EMAIL_HOST = ''
+# 授权码
+EMAIL_HOST_PASSWORD = os.getenv('CUBER_EMAIL_HOST_PASSWORD', 'your-email-password')
 
-EMAIL_HOST_USER = ''
+EMAIL_PORT = os.getenv('CUBER_EMAIL_PORT', 465)  # 由于阿里云的25端口打不开，所以必须使用SSL然后改用465端口
 
-EMAIL_HOST_PASSWORD = ''
->>>>>>> 34a8cccdb15b29f1f05599b85d89a56f8b4dd7d0
-
-EMAIL_PORT = 0
-
+EMAIL_TIMEOUT = 5
+# 是否使用了SSL 或者TLS，为了用465端口，要使用这个
+EMAIL_USE_SSL = os.getenv('CUBER_EMAIL_USE_SSL', 'True').upper() == 'TRUE'
+# 默认发件人，不设置的话django默认使用的webmaster@localhost，所以要设置成自己可用的邮箱
 EMAIL_USE_TLS = True
-
-<<<<<<< HEAD
-DEFAULT_FROM_EMAIL = 'your default email'
-=======
-DEFAULT_FROM_EMAIL = ''
->>>>>>> 34a8cccdb15b29f1f05599b85d89a56f8b4dd7d0
+# 默认发件邮箱
+DEFAULT_FROM_EMAIL = os.getenv('CUBER_DEFAULT_FROM_EMAIL', 'your-email-address')
