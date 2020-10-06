@@ -23,8 +23,6 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'your_secret_key')
 
-SECRET_KEY = 'Your key'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
