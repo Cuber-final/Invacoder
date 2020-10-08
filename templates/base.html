@@ -18,27 +18,28 @@
 
     <link rel="shortcut icon" href="{% static "image/Blog/blogo.png" %}">
     <!-- 引入bootstrap的css文件 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.1/dist/css/bootstrap.min.css"
+    <link type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.1/dist/css/bootstrap.min.css"
           rel="stylesheet">
     <!-- 引入 monokai.css -->
-    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
 
-    <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
     <!-- CSS only -->
     <!-- JS, Popper.js, and jQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
             rel="stylesheet"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
             rel="stylesheet"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.1/dist/js/bootstrap.min.js"
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.1/dist/js/bootstrap.min.js"
             rel="stylesheet"></script>
 
-    <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'prism/prism.css' %}">
 
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
     <!--引入自定义样式表-->
-    <link rel="stylesheet" href="{% static 'custom/pr_custom.css' %}">
-    <link rel="stylesheet" href="{% static 'custom/font.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'custom/pr_custom.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'custom/font.css' %}">
     {% block link %}{% endblock %}
     {% load_tctip %}
 </head>
@@ -60,8 +61,8 @@
     在实际的开发中推荐静态文件尽量都使用 cdn 的形式。
     教程采用本地引入是为了让读者了解静态文件本地部署的流程。
 -->
- {% include 'back_top.html' %}
-<script src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
+{% include 'back_top.html' %}
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
 {% block script %}{% endblock script %}
 </body>
 </html>
