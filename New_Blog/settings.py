@@ -24,12 +24,7 @@ SECRET_KEY = os.getenv('CUBER_SECRETKEY', 'your_secret_key')
 DEBUG = False
 
 # 部署到服务器时改为自己公网IP在首位
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['*']
-=======
 ALLOWED_HOSTS = ['47.96.13.183','localhost']
->>>>>>> 82c1312bb692826e6d618b3554db749d43bfa958
-
 # Application definition
 INSTALLED_APPS = [
     'simpleui',
