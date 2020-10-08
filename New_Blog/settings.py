@@ -24,7 +24,11 @@ SECRET_KEY = os.getenv('CUBER_SECRETKEY', 'your_secret_key')
 DEBUG = False
 
 # 部署到服务器时改为自己公网IP在首位
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['*']
+=======
+ALLOWED_HOSTS = ['47.96.13.183','localhost']
+>>>>>>> 82c1312bb692826e6d618b3554db749d43bfa958
 
 # Application definition
 INSTALLED_APPS = [
@@ -234,13 +238,12 @@ EMAIL_HOST = os.getenv('CUBER_EMAIL_HOST', 'smtp.qq.com')
 EMAIL_HOST_USER = os.getenv('CUBER_EMAIL_HOST_USER', 'your-email-address')
 # 授权码
 EMAIL_HOST_PASSWORD = os.getenv('CUBER_EMAIL_HOST_PASSWORD', 'your_password')
-
 # 由于阿里云的25端口打不开，所以必须使用SSL然后改用465端口
 EMAIL_PORT = os.getenv('CUBER_EMAIL_PORT', 465)
 
 EMAIL_TIMEOUT = 5
 # 是否使用了SSL 或者TLS，为了用465端口，要使用这个
-EMAIL_USE_SSL = os.getenv('CUBER_EMAIL_USE_SSL', 'True').upper() == 'TRUE'
+EMAIL_USE_SSL = True
 # 默认发件人，不设置的话django默认使用的webmaster@localhost，所以要设置成自己可用的邮箱
 EMAIL_USE_TLS = True
 # 默认发件邮箱
