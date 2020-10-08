@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv('CUBER_SECRETKEY', 'your_secret_key')
 DEBUG = False
 
 # 部署到服务器时改为自己公网IP在首位
-ALLOWED_HOSTS = os.getenv('CUBER_HOSTS', '127.0.0.1')
+ALLOWED_HOSTS = ['47.96.13.183','localhost']
 
 # Application definition
 INSTALLED_APPS = [
@@ -239,7 +239,7 @@ EMAIL_PORT = os.getenv('CUBER_EMAIL_PORT', 465)
 
 EMAIL_TIMEOUT = 5
 # 是否使用了SSL 或者TLS，为了用465端口，要使用这个
-EMAIL_USE_SSL = os.getenv('CUBER_EMAIL_USE_SSL', 'True').upper() == 'TRUE'
+EMAIL_USE_SSL = True
 # 默认发件人，不设置的话django默认使用的webmaster@localhost，所以要设置成自己可用的邮箱
 EMAIL_USE_TLS = True
 # 默认发件邮箱
