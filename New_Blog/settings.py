@@ -25,7 +25,7 @@ DEBUG = False
 
 # 部署到服务器时改为自己公网IP在首位
 
-ALLOWED_HOSTS = ['47.96.13.183','www.invacode.top']
+ALLOWED_HOSTS = ['www.invacode.top']
 
 # Application definition
 INSTALLED_APPS = [
