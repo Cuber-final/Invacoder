@@ -24,11 +24,8 @@ SECRET_KEY = os.getenv('CUBER_SECRETKEY', 'your_secret_key')
 DEBUG = False
 
 # 部署到服务器时改为自己公网IP在首位
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['INVACODE_HOST']
-=======
-ALLOWED_HOSTS = ['.invacode.top','127.0.0.1']
->>>>>>> 24448315d0b59db6239f4ef985f45cb6d2ec421f
+
 # Application definition
 INSTALLED_APPS = [
     'simpleui',
@@ -135,13 +132,10 @@ STATIC_URL = '/static/'
 # 静态文件收集目录
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
-<<<<<<< HEAD
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-=======
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
->>>>>>> 24448315d0b59db6239f4ef985f45cb6d2ec421f
+
 
 # 媒体文件收集
 MEDIA_URL = '/media/'
