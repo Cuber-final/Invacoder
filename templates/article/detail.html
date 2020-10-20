@@ -56,12 +56,12 @@
                     <i class="fa fa-eye"></i>{{ article.total_views }}
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <span style="color: #43a9ea;font-weight: bold">
-                        {{ article.created|relate_time }}&nbsp
+                        {{ article.created|date:'Y-m-d' }}&nbsp
                         <i class="fa fa-history"></i>&nbsp;
                     </span>
                     &nbsp&nbsp&nbsp
                     <span style="color: #D1BA74;font-weight: bold">
-                        {{ article.updated|relate_time }}&nbsp;&nbsp
+                        {{ article.updated|date:'Y-m-d' }}&nbsp;&nbsp
                         <i class="fa fa-spinner fa-spin"></i>&nbsp;
                     </span>&nbsp&nbsp&nbsp
                     <span><a href="#comment_block"><i class="fa fa-comment"></i>如有浏览体验的问题以及Bug，欢迎评论区留言</a></span>
@@ -111,7 +111,7 @@
 {% endblock content %}
 
 {% block script %}
-    <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+    <script src="{% static 'article/js/jquery.sticky-sidebar.min.js' %}"></script>
     <script type="text/javascript">
         $(".django-ckeditor-widget").removeAttr('style');
         $('#sidebar').stickySidebar({
@@ -120,7 +120,7 @@
         });
 
         //采用以下方式修改目录中列表图标样式
-        let text = '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+        let text = '<i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;'
         let $container = $('.toc-list');
         let $li_group = $container.find('li');
         $li_group.css('list-style', 'none')

@@ -1,0 +1,36 @@
+
+.new-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+
+.new-row {
+    position: relative;
+    height: 500px;
+}
+
+
+.lead {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    padding-top: 15%;
+}
+
+.tagline {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 50px;
+    color: #056a6a;
+}
+
+#lead_text {
+    font-family: Azonix, fantasy;
+    color: #147403;
+}
+

@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load static %}
 {% block title %} 用户信息 {% endblock title %}
 {% block content %}
-    <div class="new-container">
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <br>
@@ -37,7 +37,7 @@
                     <!-- bio -->
                     <div class="form-group col-md-4">
                         <label for="bio">简介</label>
-                        <textarea type="text" class="form-control" id="bio" name="bio"
+                        <textarea typeof="text" class="form-control" id="bio" name="bio"
                                   rows="12">{{ profile.bio }}</textarea>
                     </div>
                     <!-- 提交按钮 -->
