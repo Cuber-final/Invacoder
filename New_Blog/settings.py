@@ -24,12 +24,8 @@ SECRET_KEY = os.getenv('CUBER_SECRETKEY', 'your_secret_key')
 DEBUG = False
 
 # 部署到服务器时改为自己公网IP在首位
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['INVACODE_HOST']
-=======
 
 ALLOWED_HOSTS = ['www.invacode.top']
->>>>>>> 3291b08d46cd614760dbc9ea5e29fe8778724556
 
 # Application definition
 INSTALLED_APPS = [
@@ -101,19 +97,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-            'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
         'NAME':
-            'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
         'NAME':
-            'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
         'NAME':
-            'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -140,10 +136,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-<<<<<<< HEAD
-
-=======
->>>>>>> 3291b08d46cd614760dbc9ea5e29fe8778724556
 
 # 媒体文件收集
 MEDIA_URL = '/media/'
@@ -161,15 +153,15 @@ CKEDITOR_CONFIGS = {
     'default': {
         # 编辑器宽度自适应
         'width':
-            'auto',
+        'auto',
         'height':
-            '250px',
+        '250px',
         # tab键转换空格数
         'tabSpaces':
-            4,
+        4,
         # 工具栏风格
         'toolbar':
-            'Custom',
+        'Custom',
         # 工具栏按钮
         'toolbar_Custom': [
             # 表情 代码块
@@ -187,7 +179,7 @@ CKEDITOR_CONFIGS = {
         ],
         # 加入代码块插件
         'extraPlugins':
-            ','.join(['codesnippet', 'prism', 'widget', 'lineutils']),
+        ','.join(['codesnippet', 'prism', 'widget', 'lineutils']),
     }
 }
 
@@ -195,48 +187,47 @@ CKEDITOR_CONFIGS = {
 MDEDITOR_CONFIGS = {
     'default': {
         'width':
-            '90% ',  # Custom edit box width
+        '90% ',  # Custom edit box width
         'height':
-            500,  # Custom edit box height
+        500,  # Custom edit box height
         'toolbar': [
             "undo", "redo", "|", "bold", "del", "italic", "quote", "ucwords",
             "uppercase", "lowercase", "|", "h1", "h2", "h3", "h5", "h6", "|",
             "list-ul", "list-ol", "hr", "|", "link", "reference-link", "image",
             "code", "preformatted-text", "code-block", "table", "datetime"
-                                                                "emoji", "html-entities", "pagebreak", "goto-line", "|",
-            "help",
+            "emoji", "html-entities", "pagebreak", "goto-line", "|", "help",
             "info", "||", "preview", "watch", "fullscreen"
         ],  # custom edit box toolbar
         'upload_image_formats': ["jpg", "jpeg", "gif", "png", "bmp",
                                  "webp"],  # image upload format type
         'image_folder':
-            'editor',  # image save the folder name
+        'editor',  # image save the folder name
         'theme':
-            'default',  # edit box theme, dark / default
+        'default',  # edit box theme, dark / default
         'preview_theme':
-            'default',  # Preview area theme, dark / default
+        'default',  # Preview area theme, dark / default
         'editor_theme':
-            'default',  # edit area theme, pastel-on-dark / default
+        'default',  # edit area theme, pastel-on-dark / default
         'toolbar_autofixed':
-            True,  # Whether the toolbar capitals
+        True,  # Whether the toolbar capitals
         'search_replace':
-            True,  # Whether to open the search for replacement
+        True,  # Whether to open the search for replacement
         'emoji':
-            True,  # whether to open the expression function
+        True,  # whether to open the expression function
         'tex':
-            True,  # whether to open the tex chart function
+        True,  # whether to open the tex chart function
         'flow_chart':
-            True,  # whether to open the flow chart function
+        True,  # whether to open the flow chart function
         'sequence':
-            True,  # Whether to open the sequence diagram function
+        True,  # Whether to open the sequence diagram function
         'watch':
-            True,  # Live preview
+        True,  # Live preview
         'lineWrapping':
-            False,  # lineWrapping
+        False,  # lineWrapping
         'lineNumbers':
-            False,  # lineNumbers
+        False,  # lineNumbers
         'language':
-            'zh'  # zh / en / es
+        'zh'  # zh / en / es
     }
 }
 
