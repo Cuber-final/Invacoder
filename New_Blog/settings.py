@@ -136,6 +136,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 370178f6a79a656c4dda52eea4f78a088397d30b
 
 # 媒体文件收集
 MEDIA_URL = '/media/'
