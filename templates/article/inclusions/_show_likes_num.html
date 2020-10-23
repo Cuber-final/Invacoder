@@ -19,7 +19,8 @@
 
 
 <!-- 以下均为新代码 -->
-<!-- csrf token -->
+<!-- 下句 的 csrf token 必须引入，才能配合ajax的脚本检查 -->
+{% csrf_token %}
 <script src="{% static 'article/js/csrf.js' %}"></script>
 <script>
     // 点赞功能主函数
