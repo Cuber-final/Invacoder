@@ -64,7 +64,7 @@
                         {{ article.updated|date:'Y-m-d' }}&nbsp;&nbsp
                         <i class="fa fa-spinner fa-spin"></i>&nbsp;
                     </span>&nbsp&nbsp&nbsp
-                    <span><a href="#comment_block"><i class="fa fa-comment"></i>如有浏览体验的问题以及Bug，欢迎评论区留言</a></span>
+                    <span><a href="#"><i class="fa fa-comment"></i>如有浏览体验的问题以及Bug，欢迎联系我</a></span>
                 </div>
                 <!-- 文章正文 -->
                 <div class="col-12">
@@ -72,16 +72,19 @@
                 </div>
                 <!--<h3>点赞版块</h3>-->
                 {% show_likes_num article %}
+
+
+                {% comment %}
                 <h3>评论区</h3>
-                <!--评论发表-->
                 {% if user.is_authenticated %}
                     {% show_comment_post article %}
                 {% else %}
                     <br>
                     <h5> 请<a href="{% url 'userprofile:login' %}" class="link_style">登录</a>后，再进行评论及回复</h5>
                 {% endif %}
-                <!--已有评论-->
                 {% show_comment_list article user comments %}
+                {% endcomment %}
+
             </div>
             <!-- 文章目录版块，与文章版块并列-->
             {% if toc %}
@@ -118,12 +121,14 @@
             topSpacing: 10,
             bottomSpacing: 10,
         });
-
         //采用以下方式修改目录中列表图标样式
         let text = '<i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;'
         let $container = $('.toc-list');
         let $li_group = $container.find('li');
-        $li_group.css('list-style', 'none')
+        let $link_group = $container.find('a');
+        $link_group.css('font-size', 'small');
+        $li_group.css('list-style', 'none');
+        $li_group.css('font-size', 'large');
         /*子元素的属性修改*/
         $li_group.prepend(text);
     </script>

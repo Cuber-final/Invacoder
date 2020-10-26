@@ -27,16 +27,12 @@
                     <i class="fa fa-github fa-lg" aria-hidden="true"></i>
                 </a>
             </li>
-
+            <li class="nav-item mr-2">
+                <a class="nav-link py-md-3 " href="{% url 'homepage' %}">
+                    <i class="fa fa-cube mr-1"></i>About</a>
+            </li>
+            {% comment %}
             {% if user.is_authenticated %}
-                <!--使用模板过滤器将user的用户名变量转换为字符串并且将其与sp的用户名对比，实现了后台按钮的特殊显示-->
-                {#                {% ifequal user.username|string_transfer 'Cuberf' %}#}
-                {#                    <li class="nav-item mr-4">#}
-                {#                        <a class="nav-link py-md-3" id="admin-link" href="http://127.0.0.1:8000/admin/">#}
-                {#                            <i class="fa fa-cube mr-1"></i>后台管理#}
-                {#                        </a>#}
-                {#                    </li>#}
-                {#                {% endifequal %}#}
                 <li class="nav-item mr-2 dropdown bg-light">
                     <a class="nav-link dropdown-toggle py-md-3 " href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
@@ -54,8 +50,8 @@
                             <i class="fa fa-sign-out mr-1"></i>Log out</a>
                         <!--此删除选项是作为用户使用的而非超级管理员-->
                         <a class="dropdown-item pl-3 py-md-2 "
-                           href="#">{% comment %}onclick="user_delete()"{% endcomment %}
-                            <i class="fa fa-trash mr-1"></i>delete</a>
+                           href="#">onclick="user_delete()"
+                            <i class="fa fa-trash mr-1"></i>删除功能不开放</a>
                         <div class="dropdown-divider"></div>
                         <!--<a class="dropdown-item py-md-1 " href="#">Else</a>-->
                     </div>
@@ -63,11 +59,11 @@
                 <!-- 如果用户未登录，则显示 “登录” -->
             {% else %}
                 <li class="nav-item mr-2">
-                    <a class="nav-link py-md-3 " href="{% url 'userprofile:login' %}">
-                        <i class="fa fa-sign-in mr-1"></i>Login</a>
+                    <a class="nav-link py-md-3 " href="/">
+                        <i class="fa fa-sign-in mr-1"></i>About</a>
                 </li>
                 <!-- if 语句在这里结束 -->
-            {% endif %}
+            {% endif %}{% endcomment %}
         </ul>
     </div>
 </nav>
