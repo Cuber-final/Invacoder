@@ -108,9 +108,9 @@ def article_detail(request, id):
     # 其实指的是CommentPost对象中的article其作为article的外键对应的article_id=id
     comments = CommentPost.objects.filter(article=id)
 
-    if article.author != request.user:
-        article.total_views += 1
-        article.save(update_fields=['total_views'])
+    # if article.author != request.user:
+    article.total_views += 1
+    article.save(update_fields=['total_views'])
 
     # 将markdown语法渲染成html样式
     md = markdown.Markdown(
@@ -138,7 +138,6 @@ def article_detail(request, id):
 
 # 点赞增长的类视图
 class LikesRiseView(View):
-    @staticmethod
     def post(request, *args, **kwargs):
         article = ArticlePost.objects.get(id=kwargs.get('id'))
         article.likes_num += 1
