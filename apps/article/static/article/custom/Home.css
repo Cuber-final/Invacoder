@@ -5,32 +5,20 @@
     position: relative;
 }
 
-
 .new-row {
-    position: relative;
-    height: 500px;
+    height: 600px;
+    width: 100%;
+    line-height: 600px;
+    text-align: center;
 }
-
-
 .lead {
     position: relative;
     width: 100%;
-    text-align: center;
-    font-size: 32px;
-    padding-top: 15%;
-}
-
-.tagline {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 25px;
-    padding-top: 50px;
-    color: #056a6a;
+    font-size: 50px;
 }
 
 #lead_text {
-    font-family: Azonix, fantasy;
+    font-family: plainKai, Azonix, fantasy;
     color: #147403;
 }
 
