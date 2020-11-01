@@ -11,6 +11,7 @@
     line-height: 600px;
     text-align: center;
 }
+
 .lead {
     position: relative;
     width: 100%;
@@ -18,7 +19,7 @@
 }
 
 #lead_text {
-    font-family: plainKai, Azonix, fantasy;
-    color: #147403;
+    font-family: 'cyzcuxingkai2428b7ff842297b';
+    color: whitesmoke;
 }
 
