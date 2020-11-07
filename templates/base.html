@@ -1,39 +1,31 @@
-<!--
-    载入静态文件
-    使用 Django 3 学习的读者改为 {% load static %}
--->
 {% load static %}
 {% load tctip_tags %}
 <!DOCTYPE html>
-<!-- 网站主语言 -->
+
 <html lang="zh-cn">
 
 <head>
-    <!-- 网站采用的字符编码 -->
-    <meta charset="utf-8">
-    <!-- 预留网站标题的位置 -->
-    <title>{% block title %}{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="referrer" content="origin">
 
-    <link rel="shortcut icon" href="https://cuber.invacode.top/blogo.png">
-    <!-- 引入bootstrap的css文件 -->
+    <meta charset="utf-8">
+
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <link type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.1/dist/css/bootstrap.min.css"
           rel="stylesheet">
-    <!-- 引入 monokai.css -->
-    <link type="text/css" rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
 
     <script type="text/javascript"
             src="/static/ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js"></script>
+
+    <link rel="shortcut icon" href="https://cuber.invacode.top/blogo.png">
+
     <!-- CSS only -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="{% static 'article/custom/butterfly.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'article/custom/index.css' %}">
     <!-- JS, Popper.js, and jQuery -->
-
-    <!--引入云字体-->
-    <link href='https://cdn.repository.webfont.com/webfonts/nomal/141691/46231/5f9e9b51f629d82d682ee395.css'
-          rel='stylesheet' type='text/css'/>
-    <link href='https://cdn.repository.webfont.com/webfonts/nomal/141691/30014/5f9e9f1cf629d82d682ee396.css'
-          rel='stylesheet' type='text/css'/>
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
             rel="stylesheet"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
@@ -41,36 +33,23 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.1/dist/js/bootstrap.min.js"
             rel="stylesheet"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-    {#
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
-    #}
-
     <link type="text/css" rel="stylesheet" href="{% static 'prism/prism.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
 
-    <link type="text/css" rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    <!--引入自定义样式表-->
-    <link type="text/css" rel="stylesheet" href="{% static 'article/custom/pr_custom.css' %}">
     {% block link %}{% endblock %}
     {% load_tctip %}
 </head>
 <body>
 <!-- 引入导航栏 -->
-{% include 'header.html' %}
-<!-- 预留具体页面的位置 -->
-<div id="wrapper">
+<div id="global-wrap">
+    <!-- 预留具体页面的位置 -->
     {% block content %}
     {% endblock content %}
-    <div id="push"></div>
+    <!-- 引入注脚 -->
+    {% include 'footer.html' %}
 </div>
-<!-- 引入注脚 -->
-{% include 'footer.html' %}
 
-<!--
-    popper.js 采用 cdn 远程引入，意思是你不需要把它下载到本地。
-    在实际的开发中推荐静态文件尽量都使用 cdn 的形式。
-    教程采用本地引入是为了让读者了解静态文件本地部署的流程。
--->
-{% include 'back_top.html' %}
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
 {% block script %}{% endblock script %}
 </body>

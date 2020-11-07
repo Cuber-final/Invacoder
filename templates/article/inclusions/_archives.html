@@ -1,17 +1,18 @@
-<div class="card shadow-sm border-bottom px-3 mb-2 mb-md-3" id="category-card">
-    <div class="card-header bg-white px-0">
-        <strong><i class="fa fa-calendar-o mr-2 f-17"></i>归档</strong>
-    </div>
-    <ul class="list-group list-group-flush f-16">
-        {% for date in date_list %}
-            <li class="list-group-item d-flex justify-content-between align-items-center pr-2 py-2">
-                <a class="category-item" href="{% url 'article:archive' date.year date.month %}">
+<!-- 归档版块 -->
+<div class="card-widget card-archives">
+    <div class="card-content">
+        <div class="item-headline"><i class="fa fa-archive"></i><span>归档</span></div>
+        <ul class="card-archive-list">
+            {% for date in date_list %}
+                <li class="card-archive-list-item">
                     <!--链接指向对应页面，同时传递了两个参数，分别对应视图函数archive中的两个-->
-                    {{ date.year }} 年 {{ date.month }} 月
-                </a>
-            </li>
-        {% empty %}
-            暂无归档！
-        {% endfor %}
-    </ul>
+                    <a class="card-archive-list-link" href="{% url 'article:archive' date.year date.month %}">
+                        <span class="card-archive-list-date">{{ date.year }} 年 {{ date.month }} 月</span><span
+                            class="card-archive-list-count"></span></a></li>
+                <!--<span class="card-archive-list-count">1</span> 归档对应的文章数暂未设置-->
+            {% empty %}
+                暂无归档！
+            {% endfor %}
+        </ul>
+    </div>
 </div>

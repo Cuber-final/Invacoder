@@ -23,7 +23,6 @@ from django.core.paginator import Paginator
 
 from django.db.models import Q
 
-
 def article_list(request):
     # 根据GET请求中查询条件
     # 返回按照不同要求排序的对象数组
@@ -33,7 +32,6 @@ def article_list(request):
     # 联合查询逻辑
     if search:
         if order == 'views_rank':
-
             post_list = ArticlePost.objects.filter(Q(title__icontains=search) | Q(body__icontains=search)).order_by(
                 '-total_views')
         else:
@@ -54,7 +52,7 @@ def article_list(request):
     # 将导航对象相应的页码内容返回给 articles
     context = {'articles': articles, 'order': order, 'search': search}
     # render函数：载入模板，并返回context对象
-    return render(request, 'article/list.html', context)
+    return render(request, 'Home.html', context)
 
 
 def archive(request, year, month):
@@ -69,7 +67,7 @@ def archive(request, year, month):
     articles = paginator.get_page(page)
     # 将导航对象相应的页码内容返回给 articles
     context = {'articles': articles, 'chose_date': date_list}
-    return render(request, 'article/list.html', context)
+    return render(request, 'Home.html', context)
 
 
 def category(request, pk):
@@ -82,7 +80,7 @@ def category(request, pk):
     articles = paginator.get_page(page)
     # 将导航对象相应的页码内容返回给 articles
     context = {'articles': articles, 'cate': cate}
-    return render(request, 'article/list.html', context)
+    return render(request, 'Home.html', context)
 
 
 def tag_dist(request, pk):
@@ -96,7 +94,7 @@ def tag_dist(request, pk):
     # 将导航对象相应的页码内容返回给 articles
     context = {'articles': articles, 'cur_tag': cur_tag}
 
-    return render(request, 'article/list.html', context)
+    return render(request, 'Home.html', context)
 
 
 def article_detail(request, id):
@@ -144,6 +142,5 @@ class LikesRiseView(View):
         article.save()
         return HttpResponse('success')
 
-
-def homepage(request):
-    return render(request, 'Home.html')
+# def homepage(request):
+#     return render(request, 'Home.html')

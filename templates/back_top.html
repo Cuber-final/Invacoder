@@ -1,7 +1,5 @@
 <button type="button" id="BackTop" class="toTop-icon" style="z-index: 100;">
-    <i class="fa fa-rocket fa-4x" aria-hidden="true" title="返回顶部" ></i>
-</button>
-
+    <i class="fa fa-arrow-up fa-2x" aria-hidden="true" title="返回顶部"></i></button>
 <script>
     // 向上滚动的函数
     $(function () {
@@ -30,9 +28,8 @@
         cursor: pointer;
         position: fixed;
         right: 2.5rem;
-        bottom: 6rem;
+        bottom: 10rem;
         display: none;
-        transform: rotate(-45deg);
         background: transparent;
     }
 
@@ -40,7 +37,8 @@
     .toTop-icon:focus {
         outline: none;
     }
-    .toTop-icon > i{
+
+    .toTop-icon > i {
         color: #8CC7B5;
     }
 </style>

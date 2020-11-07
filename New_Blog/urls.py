@@ -25,6 +25,8 @@ urlpatterns = [
 
     path('article/', include('apps.article.urls', namespace='article')),
 
+    path('', views.article_list, name='homepage'),
+
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path(r'mdeditor/', include('mdeditor.urls')),
@@ -32,7 +34,7 @@ urlpatterns = [
     # 用户管理
     path('userprofile/', include('apps.userprofile.urls', namespace='userprofile')),
 
-    path('', views.homepage, name='homepage'),
+    # path('', views.homepage, name='homepage'),
 
     path('password-reset/', include('password_reset.urls')),
 

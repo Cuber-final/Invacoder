@@ -1,0 +1,319 @@
+html {
+    font-size: 62.5% !important;
+    /*默认是16px*/
+}
+
+body {
+    font-family: Helvetica, 微软雅黑, Arial, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+#global-wrap {
+    min-height: 100vh;
+}
+
+/*------------------------------------------------------*/
+
+a {
+    cursor: pointer;
+    background-color: transparent !important
+}
+
+.full-page {
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+#index_head {
+    /*相当于一个页面的设计*/
+    background-image: url("/static/image/index.png");
+    position: relative;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#nav-bg a {
+    font-size: 2.0rem;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+#nav-bg {
+    background-color: whitesmoke;
+}
+
+#quote {
+    position: absolute;
+    top: 40%;
+    padding: 0 0.5rem;
+    width: 100%;
+}
+
+#quote span {
+    font-size: 3.5rem;
+    color: whitesmoke;
+}
+
+#scroll-down {
+    position: absolute;
+    cursor: pointer;
+    bottom: 2.9rem;
+    background-color: transparent;
+    z-index: 150;
+}
+
+#scroll-icon {
+    font-size: 4.0rem;
+}
+
+#blur-bottom {
+    right: 50%;
+    left: 50%;
+    margin-left: -8em;
+    bottom: 0;
+    position: absolute;
+    /* Chrome, Opera */
+    -webkit-filter: blur(4.8px);
+    -moz-filter: blur(4.8px);
+    -ms-filter: blur(4.8px);
+    filter: blur(4.8px);
+    /*制作梯形-trapezium*/
+    border-bottom: 5.0rem solid rgb(204, 234, 248);
+    border-left: 4em solid transparent;
+    border-right: 4em solid transparent;
+    height: 0;
+    width: 16em;
+}
+
+#scroll-down {
+    animation: dance-icon 1.5s infinite;
+}
+
+@keyframes dance-icon {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -3rem);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+
+.breadcrumb a {
+    color: cadetblue;
+}
+
+#article_list .container {
+    background-color: transparent;
+}
+
+
+/*自定义滚动条高宽及背景，高宽分别对应横竖滚动条的尺寸*/
+
+::-webkit-scrollbar {
+    width: 0.5vw;
+    background-color: transparent;
+}
+
+
+/*定义滚动条轨道 内阴影+圆角*/
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px white;
+    border-radius: 0.5em;
+    background-color: whitesmoke;
+}
+
+
+/*定义滑块 内阴影+圆角*/
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    -webkit-box-shadow: inset 0 0 1em rgb(18, 78, 124);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(16, 81, 135);
+}
+
+
+/* main-文章列表部分 */
+
+#nav-breadCrumb,
+#inputKey {
+    font-size: 1.5rem;
+}
+
+.media {
+    font-size: 0.8rem;
+}
+
+.nav-item {
+    margin-right: 1.5rem !important;
+}
+
+.input-group input {
+    border-radius: 0 !important;
+}
+
+.input-group label {
+    margin-bottom: 0em !important;
+}
+
+.media-card,
+.img-card {
+    height: 10rem;
+    max-height: 10rem;
+    overflow: hidden;
+}
+
+.img-card {
+    width: 16rem;
+    max-width: 16rem;
+    /*用来自动遮挡超出部分*/
+    position: relative;
+    /* 如果有文字需要请添加这一行 需要给子元素定位使用*/
+    background: #000000;
+    /* 背景色 可以在缩放之后 透明度升高时 为img加暗*/
+}
+
+.img-card img {
+    width: auto;
+    height: 100%;
+    transition: all 0.6s ease;
+    position: absolute;
+    /* 如果需要文字则需要这一行*/
+    opacity: 1;
+    /*透明度 原状态是1 完全不透明*/
+}
+
+.img-card:hover img {
+    transform: scale(1.2, 1.2);
+    transition: all 0.6s ease;
+    opacity: 0.6;
+}
+
+.content {
+    font-size: 1.5rem;
+}
+
+.recent-post-info i {
+    font-size: 1.6rem;
+    margin-right: 1.2rem;
+}
+
+.page-item span {
+    font-size: 1.8rem;
+}
+
+
+/* -------------------------------------------- */
+
+
+/* 返回顶部图标 */
+
+
+/* 按钮边框的大小、位置、样式 */
+
+.toTop-icon {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    opacity: 0.8;
+    cursor: pointer;
+    position: fixed;
+    right: 2.5rem;
+    bottom: 6rem;
+    display: none;
+    /*transform: rotate(-45deg);旋转角度*/
+    background: transparent;
+}
+
+
+/* 取消点击按钮时的聚焦 */
+
+.toTop-icon:focus {
+    outline: none;
+}
+
+.toTop-icon > i {
+    color: #8CC7B5;
+}
+
+
+/* --------------------------- */
+
+
+/* 侧边栏部分 */
+
+.sticky_layout a,
+.pagination a {
+    font-size: 1.8rem;
+}
+
+
+/*云标签颜色,用到nth-child选择器，指的是当前元素的父元素的第n个子元素*/
+
+.tags:nth-child(5n+1) {
+    color: #D1BA74;
+}
+
+.tags:nth-child(5n+2) {
+    color: #F4606C;
+}
+
+.tags:nth-child(5n+3) {
+    color: #FF895D;
+}
+
+.tags:nth-child(5n+4) {
+    color: #78BBE6;
+}
+
+.tags:nth-child(5n+5) {
+    color: #19CAAD;
+}
+
+.card-tag-cloud a:hover {
+    text-decoration: none;
+    color: cornflowerblue;
+}
+
+
+/* ---------------------------------- */
+
+
+/* 注脚部分 */
+
+.footer-wrap {
+    padding-top: 0.5rem;
+    padding-bottom: 0;
+}
+
+.footer-wrap .copyright {
+    font-size: 1.4rem;
+    color: #D1BA74;
+    margin-bottom: 0.5rem;
+}
+
+.footer-wrap .record-number {
+    color: #F4606C;
+    font-size: 1.4rem;
+}
+
+.font-paginator{
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.font-paginator:hover{
+    text-decoration: none;
+    color:sandybrown;
+}

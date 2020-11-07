@@ -1,49 +1,92 @@
-<!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %} {% load static %}
 
-
-<!-- 写入 base.html 中定义的 title -->
-{% block title %} Invacode_Home{% endblock title %}
+{% block title %} 开发测试站点{% endblock title %}
 {% block link %}
-    <link type="text/css" rel="stylesheet" href="{% static 'article/custom/Home.css' %}">
 {% endblock %}
-<!-- 写入 base.html 中定义的 content -->
+<!-- 文章首页分两大部分：起始页--下拉后得到的文章列表页面,
+    更新设计思路将原先的home.html与list.html合并 
+-->
 
-<!--搭建首页样式-->
 {% block content %}
-    <div class="new-container">
-        <div class="new-row">
-            <div id="typed-strings">
-                <p>时过境迁 ^1000  物是人非</p>
-                <p>登高望远 ^500 终寻得</p>
+    <div class="container-fluid p-0 full-page" id="index_head">
+        <!--引入导航栏-->
+        {% include 'header.html' %}
+
+        <!--打字机效果部分-->
+        <div class="row m-0 my-0" id="quote">
+            <div class="col text-center ">
+                <div id="typed-strings">
+                   <p>Dont't live to be someone else^500</p>
+                    <p>but to be yourself</p>
+                </div>
+                <span id="lead_text"></span>
             </div>
-            <span id="lead_text" class="lead"></span>
         </div>
+        <script>
+            var typed = new Typed('#lead_text', {
+                // var typed = new Typed('.element', {
+                //     // Waits 1000ms after typing "First"
+                //     strings: ['First ^1000 sentence.', 'Second sentence.']
+                // });
+                stringsElement: '#typed-strings', //在此处自定义文本内容(可以是html元素)
+                showCursor: true,
+                cursorChar: '|',
+                autoInsertCss: true,
+                contentType: 'html',
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 50,
+                backDelay: 1000,
+                typeSpeed: 100,
+                fadeOut: false,
+                smartBackspace: true, //回退字符时保留相同字段
+                //淡出，不可与回退删除效果同时使用
+                fadeOutClass: 'typed-fade-out',
+                fadeOutDelay: 500,
+                //startDelay time before typing starts in milliseconds
+                startDelay: 500,
+                shuffle: false, //shuffle the strings
+            });
+        </script>
+        <!-- 跳动的地球 -->
+        <div class="w-100 text-center" id="scroll-down">
+            <i class="fa fa-globe fa-spin text-white" id="scroll-icon"></i>
+        </div>
+        <div id="blur-bottom"></div>
     </div>
-    <script>
-        var typed = new Typed('#lead_text', {
-            // var typed = new Typed('.element', {
-            //     // Waits 1000ms after typing "First"
-            //     strings: ['First ^1000 sentence.', 'Second sentence.']
-            // });
-            stringsElement: '#typed-strings', //在此处自定义文本内容(可以是html元素)
-            showCursor: true,
-            cursorChar: '|',
-            autoInsertCss: true,
-            contentType: 'html',
-            loop: true,
-            loopCount: Infinity,
-            backSpeed: 50,
-            backDelay: 1000,
-            typeSpeed: 100,
-            fadeOut: false,
-            smartBackspace: true, //回退字符时保留相同字段
-            //淡出，不可与回退删除效果同时使用
-            fadeOutClass: 'typed-fade-out',
-            fadeOutDelay: 500,
-            //startDelay time before typing starts in milliseconds
-            startDelay: 500,
-            shuffle: false, //shuffle the strings
-        });
-    </script>
+
+    <!--import list.html to fix-->
+    <main class="container">
+        {% include 'article/list.html' %}
+    </main>
+    {% block script %}
+        <script>
+            $(document).ready(function () {
+
+                $("#scroll-icon").click(
+                    function () {
+                        $('html,body').animate({scrollTop: 300}, "slow");
+                        //第二参数可以使数字[表示毫秒]或者slow，fast来设定动画的过渡时间以及效果
+                    }
+                );
+            });
+
+            // 向上滚动的函数
+            $(function () {
+                $('#BackTop').click(function () {
+                    $('html,body').animate({
+                        scrollTop: 0
+                    }, 500)
+                });
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 300) {
+                        $('#BackTop').fadeIn(300);
+                    } else {
+                        $('#BackTop').stop().fadeOut(300);
+                    }
+                }).scroll();
+            });
+        </script>
+    {% endblock %}
+    {% include 'back_top.html' %}
 {% endblock content %}

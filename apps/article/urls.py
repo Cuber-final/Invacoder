@@ -15,7 +15,7 @@ app_name = 'article'  # 指定应用名，在使用{% url ' ' %} 引用链接时
 
 urlpatterns = [
     # path函数将url映射到视图
-    path('article-list/', views.article_list, name='article_list'),
+    # path('/', views.article_list, name='article_list'),
     # 文章归档
     path('archives/<int:year>/<int:month>/', views.archive, name='archive'),
     # 文章分类
