@@ -9,9 +9,9 @@
     background-attachment: fixed;
 }
 
+/*文章详情页的顶部图*/
 #index_head {
-    /*相当于一个页面的设计*/
-    background-image: url("/static/image/detail-bg.png");
+    background-image: url("https://cuber.invacode.top/detail-bg.png");
     background-position: center -8rem;
     -webkit-background-size: auto;
     -moz-background-size: auto;

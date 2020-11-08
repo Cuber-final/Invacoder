@@ -25,7 +25,7 @@ a {
 
 #index_head {
     /*相当于一个页面的设计*/
-    background-image: url("/static/image/index.png");
+    background-image: url("https://cuber.invacode.top/index.png");
     position: relative;
     background-position: center center;
     -webkit-background-size: cover;
