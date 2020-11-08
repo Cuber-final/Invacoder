@@ -290,6 +290,10 @@ a {
 
 
 /* 注脚部分 */
+.footer{
+    background-image: url("https://cuber.invacode.top/index.png");
+}
+
 
 .footer-wrap {
     padding-top: 0.5rem;
