@@ -6,11 +6,10 @@
 {% block title %}
     {{ article.title }}
 {% endblock title %}
-
-{% block link %}
-    <link type="text/css" rel="stylesheet" href="{% static 'article/custom/detail.css' %}">{% endblock %}
+{% block link%}
+{% endblock %}
 {% block content %}
-    <div class="container-fluid p-0 full-page" id="index_head">
+    <div class="container-fluid p-0 page-head full-page" id="detail-head">
         <!--引入导航栏-->
         {% include 'header.html' %}
     </div>
@@ -23,7 +22,7 @@
                 <nav aria-label="breadcrumb" id="breadcrumb-style" class="d-sm-flex">
                     <ol class="breadcrumb bg-white">
                         <li class="breadcrumb-item">
-                            <a href="{% url 'homepage' %}"><i class="fa fa-home"></i>Articles</a>
+                            <a href="{% url 'homepage' %}" id="first-item"><i class="fa fa-home"></i>Articles</a>
                         </li>
                         <!--category-->
                         <li class="breadcrumb-item">

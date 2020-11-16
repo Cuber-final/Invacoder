@@ -23,6 +23,7 @@ from django.core.paginator import Paginator
 
 from django.db.models import Q
 
+
 def article_list(request):
     # 根据GET请求中查询条件
     # 返回按照不同要求排序的对象数组

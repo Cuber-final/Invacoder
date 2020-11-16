@@ -5,8 +5,8 @@
     <script>
         //对于JQuery默认参数是document，括号里的document 可以省略，也可以写成 $（function(){}） or $().ready(function(){})也就是说，有三种方式实现页面加载时就自动调用一个方法
         $(document).ready(function () {
+            $("#back-bg").addClass("home-bg");
             $("#hp_link").addClass("active");
-
         })
         $().ready(function () {
             $("#hp_link").addClass("active");
@@ -57,21 +57,6 @@
             </ol>
         </nav>
     </div>
-    <div class="col-sm">
-        <!--搜索栏-->
-        <form class="my-1" role="search" method="get">
-            <div class="form-row align-items-center">
-                <div class="col-auto">
-                    <label class="sr-only" for="inputKey">content</label>
-                    <input type="search" name="search" class="form-control" id="inputKey" placeholder="请输入关键字"
-                           autocomplete="off" required>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
 {% if cur_tag %}
     <h3><span class="gradient-text">{{ cur_tag.name }}</span>&nbsp;有关文章如下</h3>
@@ -86,15 +71,6 @@
                     </span>&nbsp;有关文章如下</h3>
 {% endif %}
 <!-- 搜索提示语;tips:search参数即搜索表单中的name属性为search对应的内容-->
-{% ifnotequal search "" %}
-    {% if articles %}
-        <h5><span class="gradient-text">"{{ search }}"</span>的搜索结果如下：</h5>
-        <hr>
-    {% else %}
-        <h5>暂无<span class="gradient-text">"{{ search }}"</span>有关的文章。</h5>
-        <hr>
-    {% endif %}
-{% endifnotequal %}
 
 <!-- 文章列表以及侧边栏展示页 -->
 <div class="layout" id="content-inner">
@@ -131,13 +107,13 @@
                         <span>...</span>
                         <a href="?page={{ articles.previous_page_number }}#content-inner"
                            class="font-paginator">1
-                        {% ifnotequal articles.previous_page_number 1 %}
-                            {{ articles.previous_page_number }}
-                        {% endifnotequal %}
+                            {% ifnotequal articles.previous_page_number 1 %}
+                                {{ articles.previous_page_number }}
+                            {% endifnotequal %}
                         </a>
                     {% endif %}
                     <!-- 当前页面 -->
-                    <span class="font-paginator" style="font-size: x-large">{{ articles.number }}</span>
+                    <span class="font-paginator" style="font-size: x-large;color: white">{{ articles.number }}</span>
                     <!-- 如果不是最末页，则显示下翻按钮 -->
                     {% if articles.has_next %}
                         <a href="?page={{ articles.next_page_number }}#content-inner" class="font-paginator">
@@ -146,7 +122,8 @@
                         {% endifnotequal %}
                         </a>
                         <span>...</span>
-                        <a href="?page={{ articles.paginator.num_pages }}#content-inner" class="font-paginator">{{ articles.paginator.num_pages }}&nbsp;&#187;</a>
+                        <a href="?page={{ articles.paginator.num_pages }}#content-inner"
+                           class="font-paginator">{{ articles.paginator.num_pages }}&nbsp;&#187;</a>
                     {% endif %}
         </span>
             </div>

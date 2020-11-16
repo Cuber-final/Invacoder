@@ -6,7 +6,7 @@
             {% for date in date_list %}
                 <li class="card-archive-list-item">
                     <!--链接指向对应页面，同时传递了两个参数，分别对应视图函数archive中的两个-->
-                    <a class="card-archive-list-link" href="{% url 'article:archive' date.year date.month %}">
+                    <a class="card-archive-list-link" href="{% url 'article:archive' date.year date.month %}#content-inner">
                         <span class="card-archive-list-date">{{ date.year }} 年 {{ date.month }} 月</span><span
                             class="card-archive-list-count"></span></a></li>
                 <!--<span class="card-archive-list-count">1</span> 归档对应的文章数暂未设置-->

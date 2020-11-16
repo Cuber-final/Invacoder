@@ -6,7 +6,7 @@
         </div>
         <div class="card-tag-cloud">
             {% for tag in tag_list %}
-                <a href="{% url 'article:tag-dist' tag.pk %}"
+                <a href="{% url 'article:tag-dist' tag.pk %}#content-inner"
                    class="tags" title="文章数:{{ tag.num_posts }}">{{ tag.name }}</a>
             {% empty %}
                 暂无标签！
