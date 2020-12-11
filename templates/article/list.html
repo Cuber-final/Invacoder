@@ -1,22 +1,7 @@
 <!-- 直接引用至首页Home.html -->
 {% load static %}
 {% load article_extras %}
-{% block script %}
-    <script>
-        //对于JQuery默认参数是document，括号里的document 可以省略，也可以写成 $（function(){}） or $().ready(function(){})也就是说，有三种方式实现页面加载时就自动调用一个方法
-        $(document).ready(function () {
-            $("#back-bg").addClass("home-bg");
-            $("#hp_link").addClass("active");
-        })
-        $().ready(function () {
-            $("#hp_link").addClass("active");
-        })
-        $(function () {
-            $("#articles-link").css('color', 'rgb(235, 117, 97)');
-        })
-        let ele = document.getElementsByTagName("a")
-    </script>
-{% endblock %}
+
 
 <!-- 首部功能栏 -->
 <div class="row" id="head-tools">
@@ -79,9 +64,16 @@
         {% for article in articles %}
             <div class="recent-post-item">
                 <div class="post_cover left_radius">
-                    <a href="{% url 'article:article_detail' article.id %}"><img class="post_bg loaded" alt="text-img"
-                                                                                 data-ll-status="loaded"
-                                                                                 src="/static/image/index.png"></a>
+                    <a href="{% url 'article:article_detail' article.id %}">
+                        <img class="post_bg loaded"
+                             alt="{{ article.title }}"
+                             data-ll-status="loaded"
+                                {% ifnotequal article.thumbnail.url "/media/thumbnail" %}
+                             src="{{ article.thumbnail.url }}"
+                                {% else %}
+                             src="/static/image/detail-bg.png"
+                                {% endifnotequal %}>
+                    </a>
                 </div>
                 <div class="recent-post-info">
                     <a href="{% url 'article:article_detail' article.id %}" class="article-title">
@@ -145,3 +137,9 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#mobile-toc-button").css("display","none");
+        $("#back-bg").addClass("home-bg");
+    });
+</script>

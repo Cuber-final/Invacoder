@@ -1,0 +1,36 @@
+<div class="col-sm">
+    <!--搜索栏-->
+    <form class="my-1" role="search" method="get">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inputKey">content</label>
+                <input type="search" name="search" class="form-control" id="inputKey" placeholder="请输入关键字"
+                       autocomplete="off" required>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+{% ifequal search|excNull True %}
+    {% comment %}如果为空字段则直接不输出{% endcomment %}
+{% endifequal %}
+
+{% ifequal search|excNull False %}
+    {% if articles %}
+        <h5><span class="gradient-text"> {{ search }}
+        </span>的搜索结果如下：</h5>
+        <hr>
+    {% else %}
+        <h5>暂无<span class="gradient-text">"{{ search }}"</span>有关的文章。</h5>
+        <hr>
+    {% endif %}
+{% endifequal %}

@@ -23,6 +23,16 @@ def transfer(value):
     return transferred
 
 
+# 文章搜索排除空串
+@register.filter(name='excNull')
+def excNull(value):
+    # 暂定100个赞为满电实现的条件
+    if value == '':
+        return True
+    else:
+        return False
+
+
 # 获取相对时间
 @register.filter(name='relate_time')
 def relate_time(value):

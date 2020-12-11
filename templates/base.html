@@ -18,9 +18,6 @@
 
     <script type="text/javascript"
             src="/static/ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js"></script>
-
-    <link rel="shortcut icon" href="https://cuber.invacode.top/blogo.png">
-
     <!-- CSS only -->
     <link type="text/css" rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
     <link type="text/css" rel="stylesheet" href="{% static 'article/custom/index.css' %}">
@@ -32,11 +29,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.1/dist/js/bootstrap.min.js"
             rel="stylesheet"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
     <link type="text/css" rel="stylesheet" href="{% static 'prism/prism.css' %}">
 
     {% block link %}{% endblock %}
-    {% load_tctip %}
+    {#    {% load_tctip %}#}
 </head>
 <body>
 <div id="back-bg"></div>
@@ -45,11 +41,13 @@
     <!-- 预留具体页面的位置 -->
     {% block content %}
     {% endblock content %}
+    {% include 'sidebar.html' %}
     <!-- 引入注脚 -->
     {% include 'footer.html' %}
 </div>
 
-<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/layer/3.1.1/layer.js"></script>
+<script type="text/javascript" src="{% static 'article/layer/layer.js' %}"></script>
+<script type="text/javascript" src=" {% static 'article/js/main.js' %}"></script>
 {% block script %}{% endblock script %}
 </body>
 </html>

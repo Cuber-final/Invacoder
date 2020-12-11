@@ -1,20 +1,16 @@
-<div id="rightside" style="opacity: 1; transform: translateX(-45px) ">
-    <div id="rightside-config-show">
-        <div>
-            <button id="rightside_config" type="button" title="設定">
-                <i class="fa fa-cog fa-2x"></i>
-            </button>
-        </div>
-        <div>
-            <button class="close" id="mobile-toc-button" type="button" title="目录" onclick="showToc(this)">
-                <i class="fa fa-list-alt fa-2x"></i>
-            </button>
-        </div>
-        <div>
-            <button id="go-up" type="button" title="回到頂部"><i class="fa fa-arrow-up fa-2x"></i></button>
-        </div>
+
+<div id="rightSide" style="opacity: 1; transform: translateX(-45px) ">
+    <div>
+        <button class="close" id="mobile-toc-button" type="button" title="目录"
+                onclick="showToc(this)">
+            <i class="iconfont">&#xe60f;</i>
+        </button>
+    </div>
+    <div>
+        <button id="go-up" type="button" title="回到頂部" style="display: none"><i class="iconfont">&#xe698;</i></button>
     </div>
 </div>
+
 
 <script type="text/javascript">
     function showToc() {
@@ -25,7 +21,7 @@
         } else {
             $("#card-toc").css("animation", "toc-close .3s ease-in-out")
             $("#mobile-toc-button").attr('class', 'close');
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#card-toc").css({
                     display: "none",
                     animation: "toc-open .2s ease-in-out",
@@ -34,25 +30,20 @@
         }
     }
 
-$(document).ready(function() {
-    $("#back-bg").addClass("detail-bg");
-});
-
     // 向上滚动的函数
-    $(function() {
-        $('#go-up').click(function() {
+    $(function () {
+        $('#go-up').click(function () {
             $('html,body').animate({
                 scrollTop: 0
             }, 500)
 
         });
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             if ($(this).scrollTop() > 300) {
-                $('#BackTop').fadeIn(300);
+                $('#go-up').fadeIn(300);
             } else {
-                $('#BackTop').stop().fadeOut(300);
+                $('#go-up').stop().fadeOut(300);
             }
         }).scroll();
-
     });
 </script>

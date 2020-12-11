@@ -1,7 +1,5 @@
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
-# Create your models here.
 from django.db import models
 # 导入内建的User模型。
 from django.contrib.auth.models import User
@@ -9,9 +7,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 import markdown
-
+from PIL import Image
 # django-ckeditor
-from ckeditor.fields import RichTextField
 
 # 博客文章数据模型
 from django.utils.html import strip_tags
@@ -57,6 +54,10 @@ class ArticlePost(models.Model):
     body = MDTextField('正文')
     # 文章摘要，预浏览
     excerpt = models.CharField('摘要', max_length=200, blank=True)
+
+    # 文章标题图
+    thumbnail = models.ImageField('文章标题图', upload_to='article/%Y%m%d/', blank=True)
+
     # 文章创建时间。参数 default=timezone.now 指定其在创建数据时将默认写入当前的时间
     created = models.DateTimeField('创建时间', default=timezone.now)
 
@@ -68,14 +69,27 @@ class ArticlePost(models.Model):
     # 文章被点赞数
     likes_num = models.PositiveIntegerField('点赞数', default=0)
 
-    # 内部类 class Meta 用于给 model 定义元数据
+    # 内部类 class Meta 用于给 model 定义元数据，
     def save(self, *args, **kwargs):
         self.modified_time = timezone.now()
+
+        # 将markdown文本渲染成html文本，然后过滤标签选出文字
+
         md = markdown.Markdown(extensions=['markdown.extensions.extra',
                                            'markdown.extensions.codehilite', ])
-        # 将markdown文本渲染成html文本，然后过滤标签选出文字
-        self.excerpt = strip_tags(md.convert(self.body)[:30])
-        super().save(*args, **kwargs)
+        self.excerpt = strip_tags(md.convert(self.body)[:40])
+        article = super(ArticlePost, self).save(*args, **kwargs)
+
+        # 固定宽度缩放图片大小
+        if self.thumbnail and not kwargs.get('update_fields'):
+            image = Image.open(self.thumbnail)
+            (x, y) = image.size
+            new_x = 500  # 可修改
+            new_y = int(new_x * (y / x))
+            resized_image = image.resize((new_x, new_y), Image.ANTIALIAS)
+            resized_image.save(self.thumbnail.path, "png")
+
+        return article
 
     class Meta:
         # ordering 指定模型返回的数据的排列顺序，是元组形式的
@@ -87,5 +101,6 @@ class ArticlePost(models.Model):
         # return self.title 将文章标题返回
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('article:article_detail', args=[self.id])
+
+def get_absolute_url(self):
+    return reverse('article:article_detail', args=[self.id])

@@ -6,9 +6,14 @@
 {% block title %}
     {{ article.title }}
 {% endblock title %}
-{% block link%}
+{% block link %}
 {% endblock %}
 {% block content %}
+    <script>
+        $(document).ready(function () {
+            $("#back-bg").addClass("detail-bg");
+        });
+    </script>
     <div class="container-fluid p-0 page-head full-page" id="detail-head">
         <!--引入导航栏-->
         {% include 'header.html' %}
@@ -75,12 +80,9 @@
                             {% endif %}
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
         {% comment %}comment-template{% endcomment %}
     </main>
-    {% include 'sidebar.html' %}
 {% endblock content %}

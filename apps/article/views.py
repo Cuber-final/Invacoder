@@ -1,9 +1,7 @@
 import re
 
-# 视图函数
-# 引入markdown模块
 import markdown
-# 导入数据模型ArticlePost
+
 from django.http import HttpResponse
 from django.views import View
 from markdown.extensions.toc import TocExtension
@@ -109,6 +107,7 @@ def article_detail(request, id):
 
     # if article.author != request.user:
     article.total_views += 1
+    # 调用该类的函数save()来保存新的浏览数
     article.save(update_fields=['total_views'])
 
     # 将markdown语法渲染成html样式
@@ -127,6 +126,7 @@ def article_detail(request, id):
     # 将正文按照md语法渲染为html页面，同时实现了能够单独提取目录变量
     article.body = md.convert(article.body)
 
+    # 正则表达式匹配文章的标题（以后可以自己改）
     m = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
     md.toc = m.group(1) if m is not None else ''
 
@@ -143,5 +143,4 @@ class LikesRiseView(View):
         article.save()
         return HttpResponse('success')
 
-# def homepage(request):
-#     return render(request, 'Home.html')
+
