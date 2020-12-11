@@ -14,8 +14,4 @@
 
 网站网址：www.invacode.top  
 
-<img src="README.assets/Home.png" alt="Index" style="zoom:67%;" />
 
-
-
-<img src="README.assets/Article.png" alt="detail" style="zoom:67%;" />
