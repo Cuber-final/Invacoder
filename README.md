@@ -12,6 +12,7 @@
 
 ------
 
+现已更换网站风格，采用HEXO博客框架+fluid主题，使用GitHub Pages 搭建部署至云端
 网站网址：www.invacode.top  
 
 
